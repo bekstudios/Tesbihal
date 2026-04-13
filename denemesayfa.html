@@ -1,0 +1,190 @@
+<!-- <!DOCTYPE html>
+<html lang="tr">
+<head>
+    
+
+    <meta charset="UTF-8">
+    <title>Saf CSS Tema ve Tab Uygulaması</title>
+    <style>
+        /* 1. DEĞİŞKENLER VE TEMEL AYARLAR */
+        :root {
+            --renk-pasif: #e0e0e0;
+            --renk-aktif: #ffffff; /* B Rengi */
+            --gecis-hizi: 0.8s;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden; /* Sayfa kaymasın, sadece sag-panel kaysın */
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 2. GİZLİ RADYO BUTONLARI */
+        input[name="tema"] {
+            display: none;
+        }
+
+        /* 3. DİNAMİK ARKA PLAN */
+        .animasyonlu-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            transition: background var(--gecis-hizi) ease-in-out;
+            background: linear-gradient(-45deg, #0071bd, #71deff); /* Başlangıç rengi */
+        }
+
+        /* 4. ANA DİV YAPISI (SALINIM ANİMASYONLU) */
+        @keyframes salinim {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        .anadiv {
+            display: flex;
+            width: 1000px;
+            height: 600px;
+            background-color: var(--renk-aktif);
+            border-radius: 20px;
+            overflow: hidden; /* Köşeleri keser */
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            animation: salinim 5s ease-in-out infinite;
+        }
+
+        .anadiv:hover {
+            animation-play-state: paused; /* Mouse gelince durur */
+        }
+
+        /* 5. SOL PANEL VE BUTONLAR (LABEL) */
+        .solpanel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--renk-pasif);
+            border-right: 1px solid #ccc;
+        }
+
+        .tab-link {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+            user-select: none;
+        }
+
+        /* Ayırıcı Çizgiler (::after) */
+        .tab-link::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 15%;
+            width: 70%;
+            height: 1px;
+            background-color: #bbb;
+        }
+
+        .tab-link:last-child::after { display: none; }
+
+        /* 6. SAĞ PANEL */
+        .sag-panel {
+            flex: 3;
+            padding: 40px;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .icerik {
+            display: none; /* Hepsi gizli */
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 7. MANTIK: SEÇİLİ TAB'A GÖRE DEĞİŞİMLER */
+
+        /* Arka Plan Renkleri */
+        #tab1:checked ~ .animasyonlu-bg { background: linear-gradient(-45deg, #0071bd, #71deff); }
+        #tab2:checked ~ .animasyonlu-bg { background: linear-gradient(-45deg, #1d8348, #52be80); }
+        #tab3:checked ~ .animasyonlu-bg { background: linear-gradient(-45deg, #8e44ad, #d2b4de); }
+        #tab4:checked ~ .animasyonlu-bg { background: linear-gradient(-45deg, #d35400, #edbb99); }
+        #tab5:checked ~ .animasyonlu-bg { background: linear-gradient(-45deg, #2c3e50, #95a5a6); }
+
+        /* Aktif Buton (Label) Stili ve Renk Bütünlüğü */
+        #tab1:checked ~ .anadiv .solpanel label[for="tab1"],
+        #tab2:checked ~ .anadiv .solpanel label[for="tab2"],
+        #tab3:checked ~ .anadiv .solpanel label[for="tab3"],
+        #tab4:checked ~ .anadiv .solpanel label[for="tab4"],
+        #tab5:checked ~ .anadiv .solpanel label[for="tab5"] {
+            background-color: var(--renk-aktif);
+            font-weight: bold;
+            border-right: none;
+        }
+
+        /* Aktif Butonun Çizgisini Kaldırma */
+        #tab1:checked ~ .anadiv .solpanel label[for="tab1"]::after,
+        #tab2:checked ~ .anadiv .solpanel label[for="tab2"]::after,
+        #tab3:checked ~ .anadiv .solpanel label[for="tab3"]::after,
+        #tab4:checked ~ .anadiv .solpanel label[for="tab4"]::after,
+        #tab5:checked ~ .anadiv .solpanel label[for="tab5"]::after {
+            display: none;
+        }
+
+        /* İçeriği Gösterme */
+        #tab1:checked ~ .anadiv .sag-panel .ic1,
+        #tab2:checked ~ .anadiv .sag-panel .ic2,
+        #tab3:checked ~ .anadiv .sag-panel .ic3,
+        #tab4:checked ~ .anadiv .sag-panel .ic4,
+        #tab5:checked ~ .anadiv .sag-panel .ic5 {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+
+    <input type="radio" name="tema" id="tab1" checked>
+    <input type="radio" name="tema" id="tab2">
+    <input type="radio" name="tema" id="tab3">
+    <input type="radio" name="tema" id="tab4">
+    <input type="radio" name="tema" id="tab5">
+
+    <div class="animasyonlu-bg"></div>
+
+    <div class="anadiv">
+        <div class="solpanel">
+            <label for="tab1" class="tab-link">Mavi Tema</label>
+            <label for="tab2" class="tab-link">Yeşil Tema</label>
+            <label for="tab3" class="tab-link">Mor Tema</label>
+            <label for="tab4" class="tab-link">Turuncu Tema</label>
+            <label for="tab5" class="tab-link">Gri Tema</label>
+        </div>
+
+        <div class="sag-panel">
+            <div class="icerik ic1">
+                <h2>Mavi Başlık</h2>
+                <p>Şu an mavi temadasın. Bu içerik sag-panel içinde yer alıyor ve eğer çok uzarsa kendi içinde aşağı kaydırılabilir.</p>
+                <div style="height: 600px; background: #f9f9f9; padding: 10px; border: 1px dashed #ccc;">
+                    Kaydırma test alanı (İçerik çok uzun...)
+                </div>
+            </div>
+            <div class="icerik ic2"><h2>Yeşil Başlık</h2><p>Doğa dostu yeşil tema içeriği.</p></div>
+            <div class="icerik ic3"><h2>Mor Başlık</h2><p>Asil mor tema içeriği.</p></div>
+            <div class="icerik ic4"><h2>Turuncu Başlık</h2><p>Enerjik turuncu tema içeriği.</p></div>
+            <div class="icerik ic5"><h2>Gri Başlık</h2><p>Modern gri tema içeriği.</p></div>
+        </div>
+    </div>
+
+</body>
+</html> -->
