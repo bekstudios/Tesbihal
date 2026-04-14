@@ -25,6 +25,8 @@ html {
     "wdth" 100;
 }
 
+
+
 .top-bar {
     position: fixed;
     top: 4vh;
@@ -319,6 +321,8 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3)
     transition: 0.5s;
 }   
 
+@media (min-width: 768px) {
+
 .tab-link::after {
     content: ""; /* İçerik boş olmalı */
     position: absolute;
@@ -361,7 +365,7 @@ label[for=tab5]::after{
     transition: 1;
 }
 
-
+}
 
 
 /* Aktif başlık ve Sağ Panel Renk Uyumu */
@@ -492,4 +496,270 @@ label[for=tab5]::after{
     opacity: 1;
     visibility: visible;
     
+}
+
+
+/* Masaüstü kodların yukarıda kalır... */
+
+/* 768px ve altı cihazlar (Telefonlar) için geçerli kurallar */
+@media (max-width: 768px) {
+
+/* ---------top-bar--------------------------------------------------- */
+
+    
+
+
+    .top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.404);
+    color: var(--dahakoyu-mavi);
+    display: flex;
+    align-items: center ;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 10;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+    border-radius: 0;
+
+
+
+    
+    
+}
+
+.top-bar .anabar{
+    display: flex;
+
+    
+     
+    
+    width: 100%;
+
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-bar .anabar .orta {
+    display: flex;
+    align-items: center;
+    
+    
+    text-decoration: dotted;
+    
+}
+
+.anabar .logo{
+    background-color: rgba(255, 255, 255, 0.527);
+    height: 60px;
+    width: 100px;
+    border-radius: 0;
+    color: rgb(87, 9, 67);
+    font-size: 16px;
+    display: flex;
+    align-items: center;   
+    justify-content: center;
+    text-decoration: none;
+}
+
+.orta a {
+    font-size: 16px;
+    color: var(--koyu-mavi);
+    text-decoration: none;
+    padding: 0 4vw;
+    display: flex;
+    
+}
+
+.orta a:hover {
+    background-color: var(--koyu-mavi);
+    color: white;
+    height: 60px;
+    
+    transition: 0.5s;
+    display: flex;
+    align-items: center;
+    
+    
+
+}
+
+.anabar .sag  a{
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.527);
+    height: 60px;
+    width: 100px;
+    border-radius: 0;
+    color: rgb(87, 9, 67);
+
+    display: flex;
+    align-items: center;   
+    justify-content: center;
+
+    text-decoration: none;
+
+    
+}
+
+/* ------------------------------------------------------------------ */
+
+    
+    /* Yan yana olan panelleri alt alta getir */
+    .anadiv {
+        flex-direction: column; 
+    }
+
+    .anadiv:hover {
+    animation-play-state: paused;
+    
+    height: 700px;
+    
+    }
+
+    .anadiv {
+    display: flex;
+    height: 700px; /* Sabit bir yükseklik verdik ki sağ taraf kayabilsin */
+    border: 3px var(--acik-mavi);
+    border-radius: 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 75vh;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    transition: 0.3s;
+    margin-top: 40px;
+
+    animation: none;
+    
+    }
+
+    .solpanel, .sagpanel {
+        width: 100%; /* Paneller ekranı tam kaplasın */
+        height: auto;
+        
+    }
+
+    .solpanel{
+        display: flex;
+        flex-direction: row;
+        height: 1vh;
+        box-shadow: none;
+    }
+
+    .solpanel:hover {
+        height: none;
+        flex: 0.6;
+    }
+
+    .tab-link {
+    flex: 2; /* 5 başlık olduğu için her biri %20 yükseklik kaplar */
+    border: none;
+     
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 0;
+    background-color: var(--mavi) 1;
+    color: var(--dahakoyu-mavi);
+    font-size: 14px;
+    font-weight: 500;
+
+    position: relative;
+
+    cursor: default;
+    transition: 0.3s;
+    transition: color 0.5s ease;
+    }
+
+.tab-link::after {
+    content: ""; /* İçerik boş olmalı */
+    position: absolute;
+    left: 0px; /* Butonun sagına koy */
+    top: 20%; /* yukardan aşağı %10 boşluk bırak (%80 genişlik kalır) */
+    width: 1px; /* Çizginin genişliği */
+    height: 60%; /* Çizginin kalınlığı */
+    background-color: var(--koyu-mavi); /* Çizginin rengi */
+
+    transition: background-color 0.5s ease;
+    
+    }
+
+    label[for=tab1]::after{
+    display: none;
+}
+label[for=tab5]::after{
+    display: absolute;
+}
+
+/* Hangi radyo buton seçiliyse (checked), ona ait olan label'ın ::after çizgisini gizle */
+#tab1:checked ~ .anadiv .solpanel label[for="tab2"]::after,
+#tab2:checked ~ .anadiv .solpanel label[for="tab3"]::after,
+#tab3:checked ~ .anadiv .solpanel label[for="tab4"]::after,
+#tab4:checked ~ .anadiv .solpanel label[for="tab5"]::after,
+#tab5:checked ~ .anadiv .solpanel label[for="tab5"]::after {
+    display: none;
+}
+
+/* Aktif butonun bir üstündeki butonun çizgisini de gizle */
+#tab2:checked ~ .anadiv .solpanel label[for="tab2"]::after,
+#tab3:checked ~ .anadiv .solpanel label[for="tab3"]::after,
+#tab4:checked ~ .anadiv .solpanel label[for="tab4"]::after,
+#tab5:checked ~ .anadiv .solpanel label[for="tab5"]::after {
+    display: none;
+}
+
+
+#tab4:checked ~ .anadiv .solpanel label::after,
+#tab5:checked ~ .anadiv .solpanel label::after {
+    color: white;
+    background-color: white;
+    transition: 1;
+}
+
+
+
+    /* Yazı boyutlarını küçült */
+    p {
+        font-size: 16px;
+    }
+
+    /* Baloncuğu (Tooltip) mobilde devasa yapma */
+    .tooltip-kelime::after {
+        width: 90%;
+        left: 5%;
+        transform: none;
+        max-width: none;
+        bottom: 110%;
+    }
+
+
+    .sagpanel {
+        flex: 7;
+        background-color: white;
+        overflow-y: auto;
+           /* Sadece içerik taşarsa bar çıksın */
+        position: relative;
+        height: 100%;        /* anadiv'in boyuna eşitle */
+        z-index: 5;          /* Tooltip'in altında kalması için */
+    }
+
+    
+
+
+}
+
+.icerik {
+    
+    width: 90vw;
+    padding-left: 2vw;
+}
+    
+    /* B rengi (İçerikle aynı) */
+
+.tab-icerik {
+    display: none; /* Varsayılan olarak gizli */
+}
 }
