@@ -321,7 +321,7 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3)
     transition: 0.5s;
 }   
 
-@media (min-width: 1080px) {
+@media screen and (min-width: 768px) {
 
 .tab-link::after {
     content: ""; /* İçerik boş olmalı */
@@ -502,7 +502,7 @@ label[for=tab5]::after{
 /* Masaüstü kodların yukarıda kalır... */
 
 /* 768px ve altı cihazlar (Telefonlar) için geçerli kurallar */
-@media (max-width: 1080px) {
+@media screen and (max-width: 768px) {
 
 /* ---------top-bar--------------------------------------------------- */
 
