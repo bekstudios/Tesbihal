@@ -248,6 +248,8 @@ h2 {
     animation: salinim 4s ease-in-out infinite; 
 
     
+
+    
 }
 
 /* Mouse üzerindeyken animasyonu durdur */
@@ -321,7 +323,7 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3)
     transition: 0.5s;
 }   
 
-@media screen and (min-width: 768px) {
+@media (min-width: 768px) {
 
 .tab-link::after {
     content: ""; /* İçerik boş olmalı */
@@ -502,7 +504,7 @@ label[for=tab5]::after{
 /* Masaüstü kodların yukarıda kalır... */
 
 /* 768px ve altı cihazlar (Telefonlar) için geçerli kurallar */
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
 
 /* ---------top-bar--------------------------------------------------- */
 
@@ -521,7 +523,7 @@ label[for=tab5]::after{
     display: flex;
     align-items: center ;
     justify-content: center;
-    font-size: 12px;
+    font-size: 8px;
     font-weight: bold;
     z-index: 10;
     box-shadow: 0 10px 15px rgba(0,0,0,0.2);
@@ -536,7 +538,7 @@ label[for=tab5]::after{
 .top-bar .anabar{
     display: flex;
 
-    
+    font-size: 12px;
      
     
     width: 100%;
@@ -560,7 +562,7 @@ label[for=tab5]::after{
     width: 100px;
     border-radius: 0;
     color: rgb(87, 9, 67);
-    font-size: 16px;
+    font-size: 12px;
     display: flex;
     align-items: center;   
     justify-content: center;
@@ -568,10 +570,10 @@ label[for=tab5]::after{
 }
 
 .orta a {
-    font-size: 16px;
+    font-size: 12px;
     color: var(--koyu-mavi);
     text-decoration: none;
-    padding: 0 4vw;
+    padding: 0 2vw;
     display: flex;
     
 }
@@ -590,7 +592,7 @@ label[for=tab5]::after{
 }
 
 .anabar .sag  a{
-    font-size: 16px;
+    font-size: 12px;
     background-color: rgba(255, 255, 255, 0.527);
     height: 60px;
     width: 100px;
@@ -612,6 +614,8 @@ label[for=tab5]::after{
     /* Yan yana olan panelleri alt alta getir */
     .anadiv {
         flex-direction: column; 
+
+        
     }
 
     .anadiv:hover {
@@ -640,6 +644,7 @@ label[for=tab5]::after{
     .solpanel, .sagpanel {
         width: 100%; /* Paneller ekranı tam kaplasın */
         height: auto;
+        
         
     }
 
@@ -674,6 +679,11 @@ label[for=tab5]::after{
     transition: color 0.5s ease;
     }
 
+
+    .tablink:hover {
+        background-color: rgb(150, 150, 150);
+    }
+
 .tab-link::after {
     content: ""; /* İçerik boş olmalı */
     position: absolute;
@@ -686,6 +696,16 @@ label[for=tab5]::after{
     transition: background-color 0.5s ease;
     
     }
+
+    /* Aktif Butonun Rengini Değiştirmek */
+#tab1:checked ~ .anadiv .solpanel label[for="tab1"],
+#tab2:checked ~ .anadiv .solpanel label[for="tab2"],
+#tab3:checked ~ .anadiv .solpanel label[for="tab3"],
+#tab4:checked ~ .anadiv .solpanel label[for="tab4"],
+#tab5:checked ~ .anadiv .solpanel label[for="tab5"] {
+    background-color: white;
+    font-weight: bold;
+}
 
     label[for=tab1]::after{
     display: none;
@@ -738,7 +758,7 @@ label[for=tab5]::after{
 
     .sagpanel {
         flex: 7;
-        background-color: white;
+        background-color: rgb(255, 255, 255);
         overflow-y: auto;
            /* Sadece içerik taşarsa bar çıksın */
         position: relative;
@@ -749,17 +769,41 @@ label[for=tab5]::after{
     
 
 
-}
 
-.icerik {
+
+    .icerik {
     
     width: 90vw;
     padding-left: 2vw;
-}
+    }
     
     /* B rengi (İçerikle aynı) */
 
-.tab-icerik {
+    .tab-icerik {
     display: none; /* Varsayılan olarak gizli */
+    }
+
 }
+
+@media (max-width: 500px) {
+    .logo , .sag {
+        /* Bazı öğeleri mobilde gizle */
+        display: none; 
+    }
+    .anabar .logo{
+        display: none;
+    }
+
+    .anabar{
+        width: min-content;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        
+        
+    }
+
+    .anabar a{
+        margin: 2vw 6vw;
+    }
 }
