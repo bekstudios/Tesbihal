@@ -1,595 +1,809 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+:root {
+    --renk-pasif: #f0f0f0; /* ?? */
+    --mavi: #0071bd; /* anadiv */
+    --acik-mavi: #71deff; /* inaktif solpanel vs */
+    --koyu-mavi: rgb(6, 64, 112); /* scrollbar vs */
+    --dahakoyu-mavi: rgb(5, 44, 77); 
+}
+
+html {
+    /* font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-feature-settings: normal;
+    font-variation-settings: normal; */
+    font-family: "Bricolage Grotesque", sans-serif;
+    
+}
+
+
+
+.bricolage-grotesque-<uniquifier> {
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 100;
+}
+
+
+
+.top-bar {
+    position: fixed;
+    top: 4vh;
+    left: 10%;
+    width: 80%;
+    min-width: 510px;
+    height: 60px;
+    background-color: white;
+    color: var(--dahakoyu-mavi);
+    display: flex;
+    align-items: center ;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 10;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+    border-radius: 20px;
+
+
+
+    
+    
+}
+
+.top-bar .anabar{
+    display: flex;
+
+    
+     
+    
+    width: 100%;
+
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-bar .anabar .orta {
+    display: flex;
+    align-items: center;
+    
+    
+    text-decoration: dotted;
+    
+}
+
+.anabar .logo{
+    background-color: var(--koyu-mavi);
+    height: 60px;
+    width: 100px;
+    border-radius: 20px 0 0 20px;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;   
+    justify-content: center;
+    text-decoration: none;
+}
+
+.orta a {
+    font-size: 16px;
+    color: var(--koyu-mavi);
+    text-decoration: none;
+    padding: 0 4vw;
+    display: flex;
+    
+}
+
+.orta a:hover {
+    background-color: var(--koyu-mavi);
+    color: white;
+    height: 60px;
+    
+    transition: 0.5s;
+    display: flex;
+    align-items: center;
+    
     
 
-    <title>Tesbihal</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="myScript.js"></script>
+}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-  </head>
+.anabar .sag  a{
+    font-size: 16px;
+    background-color: var(--koyu-mavi);
+    height: 60px;
+    width: 100px;
+    border-radius: 0 20px 20px 0;
+    color: white;
 
-  <body>
-    <input type="radio" name="tema" id="tab1" checked>
-    <input type="radio" name="tema" id="tab2">
-    <input type="radio" name="tema" id="tab3">
-    <input type="radio" name="tema" id="tab4">
-    <input type="radio" name="tema" id="tab5">
+    display: flex;
+    align-items: center;   
+    justify-content: center;
 
-    <div class="animasyonlu-bg"></div>
+    text-decoration: none;
+}
 
-    <nav class="top-bar">
-      <div class="anabar">
-        <a class="logo" href="#">Tesbihal</a>
-        <div class="orta">
-          <a href="index.html">Tesbihatlar</a>
-          <a href="nsureler.html">Namaz Sureleri</a>
-          <a href="ezberlerim.html">Ezberlerim</a>
 
-        </div>
-        <div class="sag">
-          <a href="#">Ayarlar</a>
-        </div>
-      </div>
-    </nav>
 
-    <div class="anadiv">
-      <div class="solpanel">
-        <!-- <button class="tab-link active" onclick="tabAc(event, 'k1')">
-          Sabah
-        </button> -->
-        <label for="tab1" class="tab-link">Sabah</label>
-        <label for="tab2" class="tab-link">Öğle</label>
-        <label for="tab3" class="tab-link">İkindi</label>
-        <label for="tab4" class="tab-link">Akşam</label>
-        <label for="tab5" class="tab-link">Yatsı</label>
+
+
+/* İnputları gizle +++++++++++++++++++++++++++++++++++++++++*/
+input[type="radio"] {
+    display: none;
+}
+
+/* Varsayılan Arka Plan */
+.animasyonlu-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    
+    /* Tüm renkleri buraya tek seferde yazıyoruz */
+    background: linear-gradient(to right, #ffaae6, #ffe695, #2192dd, #720039, black);
+    background-size: 400% 100%; /* Arka planı 4 kat genişletiyoruz */
+    
+    transition: background-position 1.2s ease-in-out; /* Kayma hızı */
+    background-position: 0% 0%; /* Başlangıç (Tab 1) */
+}
+
+/* Hangi tab seçiliyse arka planı o renge doğru kaydır */
+#tab1:checked ~ .animasyonlu-bg { background-position: 0% 0%; }
+#tab2:checked ~ .animasyonlu-bg { background-position: 35% 0%; }
+#tab3:checked ~ .animasyonlu-bg { background-position: 55% 0%; }
+#tab4:checked ~ .animasyonlu-bg { background-position: 75% 0%; }
+#tab5:checked ~ .animasyonlu-bg { background-position: 100% 0%; }
+
+/* Doğru Seçici: Önce input, sonra aşağısındaki anadiv, sonra onun içindeki label */
+#tab4:checked ~ .anadiv .solpanel label[for="tab1"],
+#tab4:checked ~ .anadiv .solpanel label[for="tab2"],
+#tab4:checked ~ .anadiv .solpanel label[for="tab3"],
+#tab4:checked ~ .anadiv .solpanel label[for="tab5"]
+ {
+    color: white;
+}
+#tab5:checked ~ .anadiv .solpanel label[for="tab1"],
+#tab5:checked ~ .anadiv .solpanel label[for="tab2"],
+#tab5:checked ~ .anadiv .solpanel label[for="tab3"],
+#tab5:checked ~ .anadiv .solpanel label[for="tab4"]
+ {
+    color: white;
+}
+
+
+#tab5:checked ~ .anadiv {
+    border: white 3;
+}
+
+/* Aktif Butonun Rengini Değiştirmek */
+#tab1:checked ~ .anadiv .solpanel label[for="tab1"],
+#tab2:checked ~ .anadiv .solpanel label[for="tab2"],
+#tab3:checked ~ .anadiv .solpanel label[for="tab3"],
+#tab4:checked ~ .anadiv .solpanel label[for="tab4"],
+#tab5:checked ~ .anadiv .solpanel label[for="tab5"] {
+    background-color: white;
+    font-weight: bold;
+}
+/* +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
+
+
+body  {
+    place-items: center;
+
+    background: linear-gradient(-45deg, var(--dahakoyu-mavi), var(--acik-mavi), var(--acik-mavi), var(--koyu-mavi));
+    background-size: 400% 400%; /* Arka planı büyüt ki animasyon akabilsin */
+    animation: gradientAnim 15s ease infinite;
+
+
+    margin: 0; 
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+@keyframes gradientAnim {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+h2 {
+    color: var(--koyu-mavi);
+}
+
+h2 {
+    display: block;
+    font-size: 1.5em;
+    margin-block-start: 0.38em;
+    margin-block-end: 0.68em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    unicode-bidi: isolate;
+}
+
+/* Animasyonun Tanımı */
+@keyframes salinim {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px); /* En tepe nokta */
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.anadiv {
+    
+    /* Mevcut özelliklerin... */
+    display: flex;
+    transition: transform 0.3s ease; /* Mouse çekildiğinde yumuşak geçiş için */
+    
+    /* Animasyonu başlat */
+    animation: salinim 4s ease-in-out infinite; 
+
+    
+
+    
+}
+
+/* Mouse üzerindeyken animasyonu durdur */
+.anadiv:hover {
+    animation-play-state: paused;
+    transform: translateY(0); /* Mouse üzerindeyken sabit kalsın */
+    height: 600px;
+    
+}
+
+.anadiv {
+    display: flex;
+    height: 500px; /* Sabit bir yükseklik verdik ki sağ taraf kayabilsin */
+    border: 3px var(--acik-mavi);
+    border-radius: 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 75vh;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    transition: 0.3s;
+    margin-top: 40px;
+    
+}
+
+.solpanel {
+box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+
+    flex: 0.6; /* Genişliğin ufak kısmını alır */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    border: 5px var(--mavi);
+    text-align: center;
+    
+    transition: 0.5s; /* soldan saga butonlar kayıyor */
+    
+    
+}
+
+.solpanel:hover {
+    flex: 1;
+
+}
+
+
+.solpanel label{
+    align-content: center;
+    
+}
+
+.tab-link {
+    flex: 2; /* 5 başlık olduğu için her biri %20 yükseklik kaplar */
+    border: none;
+     
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: var(--mavi) 1;
+    color: var(--dahakoyu-mavi);
+    font-size: 14px;
+    font-weight: 500;
+
+    position: relative;
+
+    cursor: default;
+    transition: 0.3s;
+    transition: color 0.5s ease;
+}
+
+.tab-link:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    transition: 0.5s;
+}   
+
+@media (min-width: 768px) {
+
+.tab-link::after {
+    content: ""; /* İçerik boş olmalı */
+    position: absolute;
+    bottom: 0; /* Butonun en altına koy */
+    left: 20%; /* Sağdan soldan %10 boşluk bırak (%80 genişlik kalır) */
+    width: 60%; /* Çizginin genişliği */
+    height: 1px; /* Çizginin kalınlığı */
+    background-color: var(--koyu-mavi); /* Çizginin rengi */
+
+    transition: background-color 0.5s ease;
+    
+}
+
+label[for=tab5]::after{
+    display: none;
+}
+
+/* Hangi radyo buton seçiliyse (checked), ona ait olan label'ın ::after çizgisini gizle */
+#tab1:checked ~ .anadiv .solpanel label[for="tab1"]::after,
+#tab2:checked ~ .anadiv .solpanel label[for="tab2"]::after,
+#tab3:checked ~ .anadiv .solpanel label[for="tab3"]::after,
+#tab4:checked ~ .anadiv .solpanel label[for="tab4"]::after,
+#tab5:checked ~ .anadiv .solpanel label[for="tab5"]::after {
+    display: none;
+}
+
+/* Aktif butonun bir üstündeki butonun çizgisini de gizle */
+#tab2:checked ~ .anadiv .solpanel label[for="tab1"]::after,
+#tab3:checked ~ .anadiv .solpanel label[for="tab2"]::after,
+#tab4:checked ~ .anadiv .solpanel label[for="tab3"]::after,
+#tab5:checked ~ .anadiv .solpanel label[for="tab4"]::after {
+    display: none;
+}
+
+
+#tab4:checked ~ .anadiv .solpanel label::after,
+#tab5:checked ~ .anadiv .solpanel label::after {
+    color: white;
+    background-color: white;
+    transition: 1;
+}
+
+}
+
+
+/* Aktif başlık ve Sağ Panel Renk Uyumu */
+.tab-link.active {
+    background-color: white;
+    border-right: none; /* Sağdaki panele geçişte çizgi olmasın */
+    font-weight: 600;
+    
+}
+
+.sagpanel {
+    flex: 3; /* Genişliğin büyük kısmını alır */
+    background-color: white; /* B rengi */
+    padding: 20px;
+    
+    color: var(--dahakoyu-mavi);
+    overflow: hidden;
+
+    font-size: 17px;
+
+
+}
+
+.icerik {
+    
+    width: 58vh;
+    padding-left: 1vh;
+}
+    
+    /* B rengi (İçerikle aynı) */
+
+.tab-icerik {
+    display: none; /* Varsayılan olarak gizli */
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(233, 233, 233);
+  padding: 0;
+  margin: 80px 0 115px 0;
+  border-radius: 20px;
+  
+  
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--koyu-mavi);
+    border-radius: 20vh;
+    height: 10px;
+}
+
+/* 1. Tüm içerikleri başlangıçta gizle */
+.icerik {
+    display: none;
+    opacity: 0;
+    height: 0;
+    
+    transition: opacity 1s ease; /* Geçişlerin yumuşak olması için */
+    overflow-y: auto;
+}
+
+/* 2. Hangi radyo butonu checked ise, onunla eşleşen içeriği göster */
+#tab1:checked ~ .anadiv .sagpanel .ic1,
+#tab2:checked ~ .anadiv .sagpanel .ic2,
+#tab3:checked ~ .anadiv .sagpanel .ic3,
+#tab4:checked ~ .anadiv .sagpanel .ic4,
+#tab5:checked ~ .anadiv .sagpanel .ic5 {
+    display: block;
+    opacity: 1;
+    height: auto;
+    overflow: visible;
+}
+
+.sagpanel {
+    flex: 5;
+    background-color: white;
+    overflow-y: auto;
+       /* Sadece içerik taşarsa bar çıksın */
+    position: relative;
+    height: 100%;        /* anadiv'in boyuna eşitle */
+    z-index: 5;          /* Tooltip'in altında kalması için */
+}
+
+.tooltip-kelime {
+    
+    
+    cursor: pointer;
+    position: relative;
+
+    display: inline-block; /* BU ÇOK ÖNEMLİ: Kutu gibi davranmasını sağlar */
+    vertical-align: top; /* Üst satıra kaymayı engellemek için metin hizasına sabitle */
+    line-height: normal;
+
+    z-index: 1000;
+    
+}
+
+/* Baloncuğun Tasarımı */
+.tooltip-kelime::after {
+    content: attr(data-bilgi); /* data-bilgi içindeki metni çek */
+    position: absolute;
+    bottom: 1.5em; /* Kelimenin üstünde dursun */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333333ea;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 6px;
+    min-width: 100px;
+    width: max-content;
+    
+    max-width: 500px;
+    font-size: 17px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+
+    z-index: 1000;
+    
+}
+
+/* Üzerine gelince göster */
+.tooltip-kelime:hover::after {
+    opacity: 1;
+    visibility: visible;
+    
+}
+
+
+/* Masaüstü kodların yukarıda kalır... */
+
+/* 768px ve altı cihazlar (Telefonlar) için geçerli kurallar */
+@media (max-width: 768px) {
+
+/* ---------top-bar--------------------------------------------------- */
+
+    
+
+
+    .top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.404);
+    color: var(--dahakoyu-mavi);
+    display: flex;
+    align-items: center ;
+    justify-content: center;
+    font-size: 8px;
+    font-weight: bold;
+    z-index: 10;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+    border-radius: 0;
+
+
+
+    
+    
+}
+
+.top-bar .anabar{
+    display: flex;
+
+    font-size: 12px;
+     
+    
+    width: 100%;
+
+    align-items: center;
+    justify-content: space-between;
+}
+
+.top-bar .anabar .orta {
+    display: flex;
+    align-items: center;
+    
+    
+    text-decoration: dotted;
+    
+}
+
+.anabar .logo{
+    background-color: rgba(255, 255, 255, 0.527);
+    height: 60px;
+    width: 100px;
+    border-radius: 0;
+    color: rgb(87, 9, 67);
+    font-size: 12px;
+    display: flex;
+    align-items: center;   
+    justify-content: center;
+    text-decoration: none;
+}
+
+.orta a {
+    font-size: 12px;
+    color: var(--koyu-mavi);
+    text-decoration: none;
+    padding: 0 2vw;
+    display: flex;
+    
+}
+
+.orta a:hover {
+    background-color: var(--koyu-mavi);
+    color: white;
+    height: 60px;
+    
+    transition: 0.5s;
+    display: flex;
+    align-items: center;
+    
+    
+
+}
+
+.anabar .sag  a{
+    font-size: 12px;
+    background-color: rgba(255, 255, 255, 0.527);
+    height: 60px;
+    width: 100px;
+    border-radius: 0;
+    color: rgb(87, 9, 67);
+
+    display: flex;
+    align-items: center;   
+    justify-content: center;
+
+    text-decoration: none;
+
+    
+}
+
+/* ------------------------------------------------------------------ */
+
+    
+    /* Yan yana olan panelleri alt alta getir */
+    .anadiv {
+        flex-direction: column; 
+
         
-      </div>
+    }
 
-      <div class="sagpanel" id="sagPanel">
-        <div class="icerik ic1" style="display: block">
-          <h2 >Sabah Tesbihatı</h2>
-          <p>
-            Sabah namazının farzı kılınıp selâmladıktan sonra,
-<br><br>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım! Sen selâmsın (esenlik ve kusursuzluk sahibisin), selâm (esenlik) Sendendir.
-Ey celâl ve ikram sahibi! Sen ne yücesin (ne mübareksin).”">“Allâhümme ente’s-selâmü ve minke’s-selâm, tebârekte yâ ẕe’l-celâli ve’likrâm”</span>
-<br><br>
-<br><br>
-denir ve aşağıdaki Salât-ı Münciye Duası, (yani Salâte’n-Tüncînâ) oku­nur:
-<br><br>
-<br><br>
+    .anadiv:hover {
+    animation-play-state: paused;
+    
+    height: 700px;
+    
+    }
 
-<span class="tooltip-kelime" data-bilgi="“Allah’ım! Efendimiz Muhammed’e ve Efendimiz Muhammed’in âline (ailesine) salât eyle.
-Öyle bir salât olsun ki, onunla bizi bütün korkulardan ve afetlerden kurtarasın.
-Onunla bütün ihtiyaçlarımızı gideresin.
-Onunla bizi bütün günahlardan temizleyesin.
-Onunla bizi katında en yüksek derecelere yükseltesin.
-Onunla bizi hayatta ve ölümden sonra bütün hayırların en son noktasına ulaştırasın.
+    .anadiv {
+    display: flex;
+    height: 700px; /* Sabit bir yükseklik verdik ki sağ taraf kayabilsin */
+    border: 3px var(--acik-mavi);
+    border-radius: 20px;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 75vh;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    transition: 0.3s;
+    margin-top: 40px;
 
-Ey dualara cevap veren! Âmin.
-Âlemlerin Rabbi olan Allah’a hamd olsun. Âmin.”">“Allahümme šalli alâ seyyidinâ Muḥammedin ve ʿalâ âli seyyidinâ Muḥammed. Šalâten tüncînâ bihâ min-cemîʿı’l-ehvâli ve’lâfât. (“ve’l-âfât” derken avuç i yere bakacak şekilde çevrilir, bitince de eski haline getirilir.) Ve takḍîlenâ bi-hâ cemîʿa’l-ḥâcât. Ve tüṭahhirunâ bi-hâ min-cemîʿı’s-seyyiât. Ve terfeʿunâ bi-hâ ʿındeke aʿle’d-derecât. Ve tübelliğunâ bi-hâ aḳša’l-ğâyât. Min-cemîʿı’lḫayrâti fi’l-ḥayâti ve baʿde’l-memât. Âmin yâ Mucîbe’d-deʿavâti ve’l-ḥamdü lillâhi Rabbi’lʿâlemîn. Âmin”</span>
-<br><br>
-denilir ve eller yüze sürülüp indirilir. Sonra tesbihâta şöyle devam edilir:
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım! Göklerde ve yerde bulunanların her bir nefeste, her bir anda, her bir bakışta şahitlik ettiği şu şehadeti Sana sunarız:”">“Allâhümme innâ nuḳaddimu ileyke beyne yedey külli nefesin ve lemḥatin ve lâḥẓatin ve ṭarfetin yaṭrifu bi-hâ ehlü’s-semâvâti ve ehlü’laraḍîne şehâdeten:</span> <span class="tooltip-kelime" data-bilgi="“Şehadet ederim ki Allah’tan başka ilâh yoktur. O tektir, O’nun hiçbir ortağı yoktur.
-Mülk O’nundur, hamd O’nadır. Diriltir ve öldürür.
-O diridir, asla ölmez. Hayır O’nun elindedir.
-O, her şeye gücü yetendir.”">Eşhedü en… (Buraya kadar bir defa söy­lenir) Lâ ilâhe illâllahü vaḥdehû lâ şerîke leh. Lehü’l-mülkü ve lehü’l-ḥamdü yuḥyî ve yümît. Ve hüve ḥayyün lâ yemût, biyedihi’l-ḫayr ve hüve ʿalâ külli şey’in ḳadîr” On defa tekrar edilir ve sonun­da “ve ileyhi’l-mašîr”</span>
-<br><br>
-denilerek Kelime-i Tev­hid bi­ti­rilir. İstiâze Duası’yla tesbihâta devam edilir (dua eder­ken eller kaldırılır ve avuç i yere bakacak şekilde tutulur):
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi ateşten (cehennemden) koru.”">“Allahümme ecirnâ mine’n-nâr. (3, 5 veya 7 de­fa tekrar edilir.)</span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi her türlü ateşten koru.”">Allahümme ecirnâ min-külli nâr. </span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi dinî ve dünyevî fitnelerden koru.”">Allahümme ecirnâ min-fitneti’d-dîniyyeti ve’d-dünyeviyyeh.</span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi ahir zaman fitnelerinden koru.”">Allahümme ecirnâ min-fitneti âḫiri’z-zemân.</span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi Deccal ve Süfyân fitnesinden koru.”">Allahümme ecirnâ min-fitneti Mesîḥı’dDeccâli ve’s-Süfyân.</span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi sapıklıklardan, bid’atlerden ve belalardan koru.”">Allahümme ecirnâ mine’ḍ-ḍalâlâti ve’l-bidʿıyyâti ve’l-beliyyât.</span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi nefislerin kötülüğünden koru.”">Allahümme ecirnâ min-şerri’n-nefsi’lemmâreh.</span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi Firavunî (azgın, zorba) nefislerin şerlerinden koru.”">Allahümme ecirnâ min-şürûri’n-nüfûsi’lemmârâti’l-firʿavniyyeh.</span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi kadınların şerrinden koru.”">Allahümme ecirnâ min-şerri’n-nisâ.</span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi kadınlardan gelecek belalardan koru.”">Allahümme ecirnâ min-belâi’n-nisâ.</span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi kadın fitnesinden koru.”">Allahümme ecirnâ min-fitneti’n-nisâ.</span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi kabir azabından koru.”">Allahümme ecirnâ min-ʿaẕâbi’l-ḳabr.</span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi kıyamet günü azabından koru.”">Allahümme ecirnâ min-ʿaẕâbi yevmi’lḳıyâmeh.</span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi cehennem azabından koru.”">Allahümme ecirnâ min-ʿaẕâbi Cehennem.</span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi kahredici azabından koru.”">Allahümme ecirnâ min-ʿaẕâbi ḳahrik.</span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi kahredici ateşinden koru.”">Allahümme ecirnâ min-ʿnâri ḳahrik.</span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi kabir azabı ve ateşlerden koru.”">Allahümme ecirnâ min-ʿaẕâbi’l-ḳabri ve’nnîrân.</span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi riya (gösteriş), süm’a (işitilsin diye amel etme), kendini beğenme ve övünmeden koru.”">Allahümme ecirnâ mine’r-riyâi ve’ssümʿati ve’l-ʿucubi ve’l-faḫr.</span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi inkârcıların taşkınlıklarından koru.”">Allahümme ecirnâmin-tecâvüzi’l-mülḥıdîn.</span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi münafıkların şerrinden koru.”">Allahümme ecirnâ min-şerri’l-münâfiḳîn.</span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“Allah’ım, bizi fasıkların (günahkârların) fitnesinden koru.”">Allahümme ecirnâ min-fitneti’l-fâsıḳîn.</span>
-<br><br>
-Allahümme ecirnâ ve ecir vâlideynâ ve ṭalebete Resâili’n-Nûri’š- šâdiḳîne fî-ḫıdmeti’l-Ḳur’âni ve’l-îmân. Ve aḥbâbene’l-mü’minîne’l-muḫlišîne ve aḳrabâenâ ve ecdâdenâ mine’n-nâr.
-<br><br>
-(Bundan son­ra avuç icleri yukarı çevrilir.)
-<br><br>
-Bi-ʿafvike yâ Mücîr, bi-faḍlike yâ Ğaffâr. Allâhümme’d-ḫılne’l-Cennete meʿâ’l-ebrâr. Allâhümme’d-ḫılne’l-Cennete meʿâ’l-ebrâr. Allâhümme’d-ḫılnâ ve edḫı’l-Üstâẕenâ Saʿîde’n-Nursî (radiyallâhu ʿanh) ve vâlideynâ ve ṭalebete Resâili’n-Nûri’š-šâdıḳîne ve iḫvânenâ ve eḫavâtinâ ve aḳrabâenâ ve ecdâdenâ ve aḥbâbene’l-mü’minîne’l-muḫlišîne fî-ḫıdmeti’l-îmâni ve’l-Ḳur’ân. El-Cennete meʿa’l-ebrâr bi-şefâati nebiyyike’l-muḫtar ve âlihi’l-eṭhâr ve ešḥâbihi’l-aḫyâr ve sellim mâ dâme’l-leylü ve’n-nehâr. Âmîn, ve’l-ḥamdü lillâhi Rabbi’lʿÂlemîn”
-<br><br>
-denilir ve eller yüze sü­rülür. Sonra namaz tesbihatına şu dua ile devam edi­lir:
-<br><br>
-“Sübḥânallahi ve’l-ḥamdü lillâhi ve lâ ilâhe illâllahü vallahü ekber ve lâ ḥavle ve lâ ḳuvvete illâ billâhi’l-ʿaliyyi’l-ʿaẓîm.”
-<br><br>
-Ve Âyete’l-Kürsî okunur:
-<br><br>
+    animation: none;
+    
+    }
 
-<span class="tooltip-kelime" data-bilgi="“Rahmân ve Rahîm olan Allah’ın adıyla.
-Allah, O’ndan başka ilâh yoktur; O diridir (hayy), her şeyin varlığı O’na bağlıdır (kayyûm).
-O’nu ne bir uyuklama tutar ne de uyku.
-Göklerde ve yerde ne varsa O’nundur.
-İzni olmadan O’nun katında kim şefaat edebilir?
-Onların önlerinde olanı da arkalarında olanı da bilir.
-Onlar ise O’nun ilminden, O’nun dilediği kadarından başka hiçbir şeyi kavrayamazlar.
-O’nun kürsüsü gökleri ve yeri kuşatmıştır.
-Onları koruyup gözetmek O’na ağır gelmez.
-O, yücedir, büyüktür.”">“Bismillâhirraḥmânirraḥîm. Allahü lâ ilâhe illâ hüve’l-ḥayyü’l-ḳayyûm. Lâ te’ḫuẕühû sinetün ve lâ nevm. Lehû mâ fi’s-semâvâti vemâ fi’l-arḍı. Menẕelleẕî yeşfeʿu ʿındehû illâ bi-iẕnih. Yâʿlemü mâ beyne eydîhim ve mâ ḫalfehüm ve lâ yuḥîṭûne bi-şey’in min-ʿılmihî illâ bi-mâ şâe. Vesiʿa kürsiyyühü’s-semâvâti ve’l-arḍi. Velâ yeûdü­ hû ḥıfẓuhümâ ve hüve’l-ʿaliyyü’l-ʿaẓîm.”</span>
-<br><br>
-Şu tesbih sözleri tekrarlanır:
-<br><br>
-<span class="tooltip-kelime" data-bilgi="“O, yüce ve çok büyüktür; celâl sahibidir. Allah her türlü eksiklikten uzaktır.”">“Ve hüve’l-‘aliyyü’l-‘az. îmu zü’l-celâli sübḥâ­ nellâh” (1 defa),</span>
-<br><br>
-<span class="tooltip-kelime" data-bilgi="Allah eksiksizdir, kusursuzdur">“Sübḥânallâh” (33 defa)</span>
-<br><br>
-“Sübḥâne’l-bâḳî dâimeni’l-ḥamdülillâh” (1 defa),
-<br><br>
-<span class="tooltip-kelime" data-bilgi="Hamd Allah'a">“Elḥamdülillâh” (33 defa)</span>
-<br><br>
-“Rabbi’l-‘âlemîne te‘âlâ şânühü Allâhü Ekber” (1 defa),
-<br><br>
-<span class="tooltip-kelime" data-bilgi="Allah büyüktür">“Allâhü Ekber” (33 defa)</span>
-<br><br>
-“Lâ ilâhe illallâhü, vaḥdehû, lâ şerîke leh, lehü’l-mülkü ve lehü’l-ḥamdü, yuḥyî ve yümît ve hüve ḥayyün lâyemût, bi-yedihi’l-ḫayru ve hüve ʿalâ külli şey’in ḳadîrun ve ileyhi’l-mašîr” denilir ve na­maz duası yapılır.
-<br><br>
-Duâdan sonra tesbihata şöyle devam edilir:
-<br><br>
-“Faʿlem ennehu Lâ ilâhe illâllah” (1 defa)
-<br><br>
-“Lâ ilâhe illâllah” (33 defa)
-<br><br>
-denilir ve ardından;
-<br><br>
-“Muḥammedü’r-resûlüllâhi šallâllahü teʿâlâ ʿaleyhi vesellem.” (1 defa)
-<br><br>
-“Lâilâhe illâllahü el-melikü’l-ḥaḳḳu’lmübîn, Muḥammedü’r-resûlullahi šâdiḳu’l-va ʿ di’l-emîn.” (10 de­fa tekrar edilir.)
-<br><br>
-“Bismillâhirraḥmânirraḥîm. İnnallâhe ve melâiketehû yüšallûne ʿale’nnebiy. Yâ eyyühelleẕîne âmenû šallû ʿaleyhi ve sellimû teslîmâ. Lebbeyk.
-<br><br>
-Allahümme šalli ʿalâ seyyidinâ Muḥammedin ve ʿalâ âli seyyidinâ Muḥammed. Biʿadedi külli dâin ve devâin ve bârik ve sellim ʿaleyhi ve ʿaleyhim kesîrâ.
-Allahümme šalli ʿalâ seyyidinâ Muḥammedin ve ʿalâ âli seyyidinâ Muḥammed. Biʿadedi külli dâin ve devâin ve bârik ve sellim ʿaleyhi ve ʿaleyhim kesîrâ.
-Allahümme šalli ʿalâ seyyidinâ Muḥammedin ve ʿalâ âli seyyidinâ Muḥammed. Biʿadedi külli dâin ve devâin ve bârik ve sellim ʿaleyhi ve ʿaleyhim kesîran kesîrâ.
-Šalli ve sellim yâ Rabbi ʿalâ ḥabîbike Muḥammedin ve ʿalâ cemîʿı’l-enbiyâi ve’l-mürselîn ve ʿalâ âli küllin ve šahbi küllin ecmaʿîn. Âmin ve’l-ḥamdü lillâhi Rabbi’l-ʿâlemîn.
- <br><br>
+    .solpanel, .sagpanel {
+        width: 100%; /* Paneller ekranı tam kaplasın */
+        height: auto;
+        
+        
+    }
 
-Elfü elfi šalâtin ve elfü elfi selâmin ʿaleyke yâ Resûlallah.
-Elfü elfi šalâtin ve elfü elfi selâmin ʿaleyke yâ Ḥabîballah.
-Elfü elfi šalâtin ve elfü elfi selâmin ʿaleyke yâ emîne vaḥyillâh.
-Allahümme šalli ve sellim ve bârik ʿalâ seyyidinâ Muḥammedin ve ʿalâ âlihî ve ašḥâbihî bi-ʿadedi evraḳı’l-eşcâr ve emvâci’lbiḥâr ve ḳaṭarâti’l-emṭâr vağfir lenâ verḥamnâ velṭuf binâ ve bi-Üstâẕinâ Saʿîdi’n-Nursî (radiyallahu ʿanh) ve vâlideynâ ve bi-ṭalebeti Resâili’n-Nuri’š-šadıḳîne yâ ilâhenâ bi-külli šalâtin minhâ eşhedü en lâilâhe illâllah ve eşhedü enne Muḥammeden Resûlüllâhi Šallallâhü ʿAleyhi Ve sellem.”
-<br><br>
-Aşağıdaki Duâ-i Tercümân-ı İsm-i A’zâm ile tes­bi­hata devam edilir:
-<br><br>
-Sübḥâneke yâ Allah teʿâleyte yâ Raḥmân ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Raḥîm teʿâleyte yâ Kerîm ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Ḥamîd teʿâleyte yâ Ḥakîm ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Mecîd teʿâleyte yâ Melîk ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Ḳuddûs teʿâleyte yâ Selâm ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Mü’min teʿâleyte yâ Müheymin ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ ʿAzîz teʿâleyte yâ Cebbâr ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Mütekebbîr teʿâleyte yâ Ḫàlık ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Evvel teʿâleyte yâ Âḫir ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Ẓâhir teʿâleyte yâ Bâṭın ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Bâri’ teʿâleyte yâ Mušavvir ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Tevvâb teʿâleyte yâ Vehhâb ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Bâis teʿâleyte yâ Vâris ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Ḳadîm teʿâleyte yâ Muḳîm ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Ferd teʿâleyte yâ Vitr ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Nûr teʿâleyte yâ Settâr ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Celîl teʿâleyte yâ Cemîl ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Ḳàhir teʿâleyte yâ Ḳàdir ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Melîk teʿâleyte yâ Muḳtedir ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ ʿAlîm teʿâleyte yâ ʿAllâm ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ ʿAẓîm teʿâleyte yâ Ğafûr ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Ḥalîm teʿâleyte yâ Vedûd ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Şehîd teʿâleyte yâ Şâhid ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Kebîr teʿâleyte yâ Müteʿâl ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Nûr teʿâleyte yâ Lâṭîf ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Semiʿ teʿâleyte yâ Kefîl ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Ḳarîb teʿâleyte yâ Bašîr ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Ḥaḳ teʿâleyte yâ Mübîn ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Raûf teʿâleyte yâ Raḥîm ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Ṭâhir teʿâleyte yâ Muṭahhir ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Mücemmil teʿâleyte yâ Mufaḍ­ ḍıl ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Muẓhir teʿâleyte yâ Münʿim ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Deyyân teʿâleyte yâ Sulṭân ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Ḥannân teʿâleyte yâ Mennân ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Eḥad teʿâleyte yâ Šamed ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Ḥayy teʿâleyte yâ Ḳayyûm ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ ʿAdl teʿâleyte yâ Ḥakem ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Sübḥâneke yâ Ferd teʿâleyte yâ Ḳuddûs ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.<br><br>
-Avuçlar yukarı gelecek şekilde eller kaldırılır:
-<br><br>
-“Sübḥâneke âhiyyen şerâhiyyen teʿâleyte lâ ilâhe illâ ente ecirnâ ve ecir Üstâẕenâ Saʿîde’n-Nursî (raḍıyallâhu ʿanh) ve vâlideynâ ve iḫvânenâ ve eḫavâtinâ ve ṭalebete Resâili’n-Nûri ve rufeḳàenâ ve aḥbâbene’l-mü’minîne’lmuḫlišîne mine’n-nâr.
-<br><br>
-(Avuç i yere bakacak şekilde çevrilir.)
-<br><br>
-Ve min-külli nâr vaḥ­ feẓnâ min-şerri’n-nefsi ve’ş-şeyṭân ve minşerri’l-cinni ve’l-insân ve min-şerri’l-bidʿati ve’ḍ-ḍalâlâti ve’l-ilḥâdi ve’ṭ-ṭuğyân.
-<br><br>
-(Avuç iç tekrar yukarıya baka­cak şekle getirilir.)
-<br><br>
-Bi-ʿafvike yâ Mücîr, bi-faḍlike yâ Ğaffâr biraḥmetike yâ Erḥame’r-râḥimîn. Allahümm’e-dḫılne’l-Cennete meʿâ’l-ebrâr, bi­-şefâʿati nebiyyike’l-muḫtâr. Âmin, ve’lḥamdü lillâhi Rabbi’l-Âlemîn.”
-<br><br>
-Haşir Sûresi’nin 20-24. âye (Lâyestevî) o­ku­na­rak tesbihat bitirilir.
-<br><br>
-“Bismillâhirraḥmânirraḥîm Lâ yestevî ašḥâbü’n-nâri ve ašḥâbü’l-Cenneh. Ašḥâbü’l-Cenneti hümü’l-fâizûn. . Lev enzelnâ hâẕe’l-Ḳur’âne ʿalâ cebelin leraeytehû ḫâşiʿan mütešaddian min-ḫaşyetillâh. Ve tilke’l-emsâlü naḍribühâ linnâsi leʿallehüm yetefekkerûn. . Hüvallahü’l-leẕî lâ ilâhe illâ hû. ʿÂlimü’l-ğaybi ve’ş-şehâdeti. Hüve’rRaḥmânü’r-Raḥîm. . Hüvallâhü’l-leẕî lâ ilâhe illâ hû. El-Melikü’l-Ḳuddûsü’s-Selâmü’l-Mü’­ minü’l-Müheyminü’l-ʿAzîzü’l-Cebbârü’l-Mü­ tekebbir. Sübḥânellâhi ʿammâ yüşrikûn. . Hüvallâhü’l-Ḫàliḳu’l-Bâriü’l-Müšavviru lehü’lEsmâü’l-­Ḥüsnâ. Yüsebbiḥu lehû mâ fi’ssemâvâti ve’l-arḍi. Ve hüve’l-ʿAzîzü’l-Ḥakîm.”
-          </p>
-        </div>
-        <div  class="icerik ic2" style="display: block">
-            <h2>Öğle Tesbihatı</h2>
-            <p>Öğle namazının farzı kılınıp selâm verildikten sonra,
+    .solpanel{
+        display: flex;
+        flex-direction: row;
+        height: 1vh;
+        box-shadow: none;
+    }
 
-“Allâhümme ente’s-selâmü ve minke’s-selâm, tebârekte yâ ẕe’l-celâli ve’likrâm” denir ve aşağıdaki Salat-ı MünciyeDuası (yani salat’en Tüncina) okunur.
-“Allahümme šalli alâ seyyidinâ Muḥammedin ve ʿalâ âli seyyidinâ Muḥammed. Šalâten tüncînâ bihâ min-cemîʿı’l-ehvâli ve’l-âfât. (“ve’l- âfât” derken avuç içleri yere bakacak şekilde çevrilir, bitince de eski haline getirilir.) Ve takḍîlenâ bi-hâ cemîʿa’l-ḥâcât. Ve tüṭahhirunâ bi-hâ min-cemîʿı’s-seyyiât. Ve terfeʿunâ bi-hâ ʿindeke aʿle’d-derecât. Ve tübelliğunâ bi-hâ aḳša’l-ğâyât. Min-cemîʿi’l-ḫayrâti fi’l-ḥayâti ve baʿde’l-memât. Âmin yâ Mucîbe’d-deʿavâti ve’l-ḥamdü lillâhi Rabbi’l-ʿâlemîn. Âmin” denilir ve eller yüze sürülüp indirilir.
+    .solpanel:hover {
+        height: none;
+        flex: 0.6;
+    }
 
-Öğle namazının son sünneti kılınır. Selâm ver­dik­ten sonra tesbihata şu dua ile devam edilir:
+    .tab-link {
+    flex: 2; /* 5 başlık olduğu için her biri %20 yükseklik kaplar */
+    border: none;
+     
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 0;
+    background-color: var(--mavi) 1;
+    color: var(--dahakoyu-mavi);
+    font-size: 14px;
+    font-weight: 500;
 
-“Sübḥânallahi velḥamdü lillâhi ve lâilâhe illâllahü vallahü ekber ve lâ ḥavle ve lâ ḳuvvete illâ billâhi’l-ʿaliyyi’l-ʿaẓîm.” Ve Âyete’l-Kürsî okunur: “Bismillâhirraḥmânirraḥîm. Allahü lâ ilâhe illâ hüve’l-ḥayyü’l-ḳayyûm. Lâ te’ḫuẕühû sinetün ve lâ nevm. Lehû mâ fi’s-semâvâti ve mâ fi’l-arḍi. Menẕelleẕî yeşfeʿu ʿindehû illâ bi-iẕnih. Yâʿlemü mâ beyne eydîhim ve mâ ḫalfehüm ve lâ yuḥîṭûne bişey’in min-ʿilmihî illâ bimâ şâe. Vesiʿa kürsiyyühü’s-semâvâti ve’l-arḍi. Ve lâ yeûdühû ḥıfẓuhümâ ve hüve’l-ʿaliyyü’l-ʿaẓîm.
+    position: relative;
 
-Şu tesbih sözleri tekrarlanır:
+    cursor: default;
+    transition: 0.3s;
+    transition: color 0.5s ease;
+    }
 
-“Ve hüve’l-‘aliyyü’l-‘az. îmu zü’l-celâli sübḥâ­ nellâh” (1 defa),
 
-“Sübḥânallâh” (33 defa)
+    .tablink:hover {
+        background-color: rgb(150, 150, 150);
+    }
 
-“Sübḥâne’l-bâḳî dâimeni’l-ḥamdülillâh” (1 defa),
+.tab-link::after {
+    content: ""; /* İçerik boş olmalı */
+    position: absolute;
+    left: 0px; /* Butonun sagına koy */
+    top: 20%; /* yukardan aşağı %10 boşluk bırak (%80 genişlik kalır) */
+    width: 1px; /* Çizginin genişliği */
+    height: 60%; /* Çizginin kalınlığı */
+    background-color: var(--koyu-mavi); /* Çizginin rengi */
 
-“Elḥamdülillâh” (33 defa)
+    transition: background-color 0.5s ease;
+    
+    }
 
-“Rabbi’l-‘âlemîne te‘âlâ şânühü Allâhü Ekber” (1 defa),
+    /* Aktif Butonun Rengini Değiştirmek */
+#tab1:checked ~ .anadiv .solpanel label[for="tab1"],
+#tab2:checked ~ .anadiv .solpanel label[for="tab2"],
+#tab3:checked ~ .anadiv .solpanel label[for="tab3"],
+#tab4:checked ~ .anadiv .solpanel label[for="tab4"],
+#tab5:checked ~ .anadiv .solpanel label[for="tab5"] {
+    background-color: white;
+    font-weight: bold;
+}
 
-“Allâhü Ekber” (33 defa)
+    label[for=tab1]::after{
+    display: none;
+}
+label[for=tab5]::after{
+    display: absolute;
+}
 
-“Lâ ilâhe illâllahü, vaḥdehû, lâ şerîke leh, lehü’l-mülkü ve lehü’l-ḥamdü, yuḥyî ve yümît ve hüve ḥayyün lâ yemût, bi-yedihi’l-ḫayru ve hüve ʿalâ külli şey’in ḳadîr ve ileyhi’l-mašîr”
+/* Hangi radyo buton seçiliyse (checked), ona ait olan label'ın ::after çizgisini gizle */
+#tab1:checked ~ .anadiv .solpanel label[for="tab2"]::after,
+#tab2:checked ~ .anadiv .solpanel label[for="tab3"]::after,
+#tab3:checked ~ .anadiv .solpanel label[for="tab4"]::after,
+#tab4:checked ~ .anadiv .solpanel label[for="tab5"]::after,
+#tab5:checked ~ .anadiv .solpanel label[for="tab5"]::after {
+    display: none;
+}
 
-denilir ve namaz du­a­sı yapılır. Duâdan sonra tesbihata şöyle devam edilir:
+/* Aktif butonun bir üstündeki butonun çizgisini de gizle */
+#tab2:checked ~ .anadiv .solpanel label[for="tab2"]::after,
+#tab3:checked ~ .anadiv .solpanel label[for="tab3"]::after,
+#tab4:checked ~ .anadiv .solpanel label[for="tab4"]::after,
+#tab5:checked ~ .anadiv .solpanel label[for="tab5"]::after {
+    display: none;
+}
 
-“Faʿlem ennehu” (1 defa)
 
-“Lâ ilâhe illâllah” (33 defa söylenir.)
+#tab4:checked ~ .anadiv .solpanel label::after,
+#tab5:checked ~ .anadiv .solpanel label::after {
+    color: white;
+    background-color: white;
+    transition: 1;
+}
 
-“Muḥammedü’r-resûlüllâhi šallâllahü teʿâlâ ʿaleyhi vesellem.” (1 defa)
 
-“Bismillâhirraḥmânirraḥîm. İnnallâhe ve melâiketehû yüšallûne ʿale’nnebiy. Yâ eyyühelleẕîne âmenû šallû ʿaleyhi ve sellimû teslîmâ. Lebbeyk. Tesbihâtın burasında Peygamberimize (a.s.m.) şöyle salât ve selâm edilir:
 
- 
+    /* Yazı boyutlarını küçült */
+    p {
+        font-size: 16px;
+    }
 
- 
+    /* Baloncuğu (Tooltip) mobilde devasa yapma */
+    .tooltip-kelime::after {
+        width: 90%;
+        left: 5%;
+        transform: none;
+        max-width: none;
+        bottom: 110%;
+    }
 
-Allahümme šalli ʿalâ seyyidinâ Muḥammedin ve ʿalâ âli seyyidinâ Muḥammed. Biʿadedi külli dâin ve devâin ve bârik ve sellim ʿaleyhi ve ʿaleyhim kesîrâ.
-Allahümme šalli ʿalâ seyyidinâ Muḥammedin ve ʿalâ âli seyyidinâ Muḥammed. Biʿadedi külli dâin ve devâin ve bârik ve sellim ʿaleyhi ve ʿaleyhim kesîrâ.
-Allahümme šalli ʿalâ seyyidinâ Muḥammedin ve ʿalâ âli seyyidinâ Muḥammed. Biʿadedi külli dâin ve devâin ve bârik ve sellim ʿaleyhi ve ʿaleyhim kesîran kesîrâ.
-Šalli ve sellim yâ Rabbi ‘alâ ḥabîbike Muḥammedin ve ʿalâ cemîʿı’l-enbiyâi ve’l-mürselîn ve ʿalâ âli küllin ve šahbi küllin ecmaʿîn. Âmin ve’l-ḥamdü lillâhi Rabbi’l-âlemîn.
 
-Elfü elfi šalâtin ve elfü elfi selâmin ʿaleyke yâ Resûlallah.
-Elfü elfi šalâtin ve elfü elfi selâmin ʿaleyke yâ Ḥabîballah.
-Elfü elfi šalâtin ve elfü elfi selâmin ʿaleyke yâ emîne vaḥyillâh.
-Allahümme šalli ve sellim ve bârik ʿalâ seyyidinâ Muḥammedin ve ʿalâ âlihî ve ašḥâbihî bi-ʿadedi evraḳı’l-eşcâr ve emvâci’lbiḥâr ve ḳaṭarâti’l-emṭâr vağfir lenâ verḥamnâ velṭuf binâ ve bi-Üstâẕinâ Saʿîdi’n-Nursî (raḍiyallahu ʿanh) ve vâlideynâ ve bi-ṭalebeti Resâili’n-Nuri’š-šadıḳîne yâ ilâhenâ bi-külli šalâtin minhâ eşhedü en-lâilâhe illâllah ve eşhedü enne Muḥammeden Resûlüllâhi Šallallâhü ʿAleyhi Vesellem.”
+    .sagpanel {
+        flex: 7;
+        background-color: rgb(255, 255, 255);
+        overflow-y: auto;
+           /* Sadece içerik taşarsa bar çıksın */
+        position: relative;
+        height: 100%;        /* anadiv'in boyuna eşitle */
+        z-index: 5;          /* Tooltip'in altında kalması için */
+    }
 
-İsm-i A’zâm duası okunur:
+    
 
-“Bismillâhirraḥmânirraḥîm.
 
-Yâ Cemîlu yâ Allah,
-Yâ Ḳarîbu yâ Allah
-Yâ Mucîbu yâ Allah,
-Yâ Ḥabîbu yâ Allah
-Yâ Raûfu yâ Allah,
-Yâ ʿAṭûfu yâ Allah
-Yâ Maʿrûfu yâ Allah,
-Yâ Lâṭîfu yâ Allah
-Yâ ʿAẓîmu yâ Allah,
-Yâ Ḥannânu yâ Allah
-Yâ Mennânu yâ Allah,
-Yâ Deyyânu yâ Allah
-Yâ Sübḥânu yâ Allah,
-Yâ Emânu yâ Allah
-Yâ Bürhânu yâ Allah,
-Yâ Sulṭânu yâ Allah
-Yâ Müsteʿânu yâ Allah,
-Yâ Muḥsinu yâ Allah
-Yâ Müteʿâlu yâ Allah,
-Yâ Raḥmânu yâ Allah
-Yâ Raḥîmu yâ Allah,
-Yâ Kerîmu yâ Allah
-Yâ Mecîdu yâ Allah,
-Yâ Ferdu yâ Allah
-Yâ Vitru yâ Allah,
-Yâ Eḥadu yâ Allah
-Yâ Šamedu yâ Allah,
-Yâ Maḥmûdu yâ Allah
-Yâ Šâdıḳa’l-Vaʿdi yâ Allah,
-Yâ ʿAliyyu yâ Allah
-Yâ Ğaniyyu yâ Allah,
-Yâ Şâfî yâ Allah
-Yâ Kâfî yâ Allah,
-Yâ Muʿâfî yâ Allah
-Yâ Bâḳî yâ Allah,
-Yâ Hâdî yâ Allah
-Yâ Ḳàdiru yâ Allah,
-Yâ Sâtiru yâ Allah
-Yâ Ḳahhâru yâ Allah,
-Yâ Cebbâru yâ Allah
-Yâ Ğaffâru yâ Allah,
-Yâ Fettâḥu yâ Allah”
-Avuçlar yukarı gelecek şekilde eller açılır:
 
-Yâ Rabbe’s-semâvâti ve’l-arḍı, yâ ẕe’l-celâli ve’l-ikrâm. Es’elüke bi-ḥaḳḳı hâẕihi’l-esmâi küllihâ entüšalliye ʿalâ seyyidinâ Muḥammedin ve ʿalâ âli Muḥammedin verḥam Muḥammeden kemâ šalleyte ve sellemte ve bârekte ve raḥimte ve teraḥḥamte ʿalâ İbrâhîme ve ʿalâ âli İbrâhîme fi’l-ʿâlemîn, Rabbenâ inneke ḥamîdü’m-mecîd, bi-raḥmetike yâ erḥamerrâḥimîn, ve’l-ḥamdülillâhi Rabbi’l-ʿâlemîn.”
 
-Fetih Sûresi’nin 27-29. âyetleri (Leḳad Šadaḳal­lâhü) okunur ve tesbihat sona erer.
+    .icerik {
+    
+    width: 90vw;
+    padding-left: 2vw;
+    }
+    
+    /* B rengi (İçerikle aynı) */
 
-Bismillâhirraḥmânirraḥîm
+    .tab-icerik {
+    display: none; /* Varsayılan olarak gizli */
+    }
 
-Leḳad šadaḳallâhü resûlehü’r-rü’yâ bi’lhaḳḳi letedḫulünne’l-mescide’l-ḥarâme inşâallâhü âminîne muḥalliḳîne ruûseküm ve muḳaššırîne lâ teḫafûne, feʿalime mâ lem ta’lemû fecaʿale min-dûni ẕâlike fetḥan ḳarîbâ. . Hüvelleẕî ersele rasûlehû bi’l-hüdâ ve dîni’lhaḳḳı li-yuẓhirahû ʿale’d-dîni küllihî ve kefâ billâhi şehîdâ. . Muḥammedü’r-resûlüllâhi ve’lleẕîne meʿahû eşiddâü ʿale’l-küffâri ruḥamâü beynehüm terâhüm rukkeʿan sücceden yebteğûne faḍlem-minallâhi ve rıḍvânâ, sîmâhüm fî-vücûhihim min-eseri’s-sücûd. Ẕâlike meselühüm fi’t-tevrâti ve meselühüm fi’l-incîli kezerʿin aḫrace şaṭ’ehû feâzerehû festağleẓa festevâ ʿalâ sûḳıhî yuʿcibü’z-zürrâʿa li-yağîẓa bi-himü’lküffâr. Veʿadallâhü’l-leẕîne âmenü ve ʿamilü’š- šâliḥâti minhum mağfiraten ve ecran ʿaẓîmâ.</p>
-        </div>
-        <div class="icerik ic3" style="display: block">
-            <h2>İkindi Tesbihatı</h2>
-            <p>İkindi namazının farzı kılınıp selâm verildikten sonra, “Allâhümme ente’s-selâmü ve minke’s-selâm, tebârekte yâ ẕe’l-celâli ve’likrâm” denir ve aşağıdaki Salât-ı Münciye Duası, (yani Salâte’n-Tüncînâ) oku­nur: “Allahümme šalli alâ seyyidinâ Muḥammedin ve ʿalâ âli seyyidinâ Muḥammed. Šalâten tüncînâ bihâ min-cemîʿı’l-ehvâli ve’lâfât. (“ve’l-âfât” derken avuç içleri yere bakacak şekilde çevrilir, bitince de eski haline getirilir.) Ve takḍîlenâ bi-hâ cemîʿa’l-ḥâcât. Ve tüṭahhirunâ bi-hâ min-cemîʿı’s-seyyiât. Ve terfeʿunâ bi-hâ ʿındeke aʿle’d-derecât. Ve tübelliğunâ bi-hâ aḳša’l-ğâyât. Min-cemîʿı’lḫayrâti fi’l-ḥayâti ve baʿde’l-memât. Âmin yâ Mucîbe’d-deʿavâti ve’l-ḥamdü lillâhi Rabbi’lʿâlemîn. Âmin” denilir ve eller yüze sürülüp indirilir.
+}
 
-Sonra namaz tesbihatına şu dua ile devam edi­lir: “Sübḥânallahi ve’l-ḥamdü lillâhi ve lâ ilâhe illâllahü vallahü ekber ve lâ ḥavle ve lâ ḳuvvete illâ billâhi’l-ʿaliyyi’l-ʿaẓîm.”Ve Âyete’l-Kürsî okunur: “Bismillâhirraḥmânirraḥîm. Allahü lâ ilâhe illâ hüve’l-ḥayyü’l-ḳayyûm. Lâ te’ḫuẕühû sinetün ve lâ nevm. Lehû mâ fi’s-semâvâti vemâ fi’l-arḍı. Menẕelleẕî yeşfeʿu ʿındehû illâ bi-iẕnih. Yâʿlemü mâ beyne eydîhim ve mâ ḫalfehüm ve lâ yuḥîṭûne bi-şey’in min-ʿılmihî illâ bi-mâ şâe. Vesiʿa kürsiyyühü’s-semâvâti ve’l-arḍi. Velâ yeûdü­ hû ḥıfẓuhümâ ve hüve’l-ʿaliyyü’l-ʿaẓîm.”
+@media (max-width: 500px) {
+    .logo , .sag {
+        /* Bazı öğeleri mobilde gizle */
+        display: none; 
+    }
+    .anabar .logo{
+        display: none;
+    }
 
-Şu tesbih sözleri tekrarlanır: “Ve hüve’l-‘aliyyü’l-‘az. îmu zü’l-celâli sübḥâ­ nellâh” (1 defa), “Sübḥânallâh” (33 defa) “Sübḥâne’l-bâḳî dâimeni’l-ḥamdülillâh” (1 defa), “Elḥamdülillâh” (33 defa) “Rabbi’l-‘âlemîne te‘âlâ şânühü Allâhü Ekber” (1 defa), “Allâhü Ekber” (33 defa) “Lâ ilâhe illallâhü, vaḥdehû, lâ şerîke leh, lehü’l-mülkü ve lehü’l-ḥamdü, yuḥyî ve yümît ve hüve ḥayyün lâyemût, bi-yedihi’l-ḫayru ve hüve ʿalâ külli şey’in ḳadîrun ve ileyhi’l-mašîr” denilir ve na­maz duası yapılır.
+    .anabar{
+        width: min-content;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        
+        
+    }
 
-Duâdan sonra tesbihata şöyle devam edilir: “Faʿlem ennehu” (1 defa)
-“Lâ ilâhe illâllah” (33 defa) denilir ve ardından; “Muḥammedü’r-resûlüllâhi šallâllahü teʿâlâ ʿaleyhi vesellem.” (1 defa)
-
-“Bismillâhirraḥmânirraḥîm. İnnallâhe ve melâiketehû yüšallûne ʿale’nnebiy. Yâ eyyühelleẕîne âmenû šallû ʿaleyhi ve sellimû teslîmâ. Lebbeyk.
-
-Allahümme šalli ʿalâ seyyidinâ Muḥammedin ve ʿalâ âli seyyidinâ Muḥammed. Biʿadedi külli dâin ve devâin ve bârik ve sellim ʿaleyhi ve ʿaleyhim kesîrâ. Allahümme šalli ʿalâ seyyidinâ Muḥammedin ve ʿalâ âli seyyidinâ Muḥammed. Biʿadedi külli dâin ve devâin ve bârik ve sellim ʿaleyhi ve ʿaleyhim kesîrâ. Allahümme šalli ʿalâ seyyidinâ Muḥammedin ve ʿalâ âli seyyidinâ Muḥammed. Biʿadedi külli dâin ve devâin ve bârik ve sellim ʿaleyhi ve ʿaleyhim kesîran kesîrâ. Šalli ve sellim yâ Rabbi ʿalâ ḥabîbike Muḥammedin ve ʿalâ cemîʿı’l-enbiyâi ve’l-mürselîn ve ʿalâ âli küllin ve šahbi küllin ecmaʿîn. Âmin ve’l-ḥamdü lillâhi Rabbi’l-ʿâlemîn.
-
-Elfü elfi šalâtin ve elfü elfi selâmin ʿaleyke yâ Resûlallah.
-Elfü elfi šalâtin ve elfü elfi selâmin ʿaleyke yâ Ḥabîballah.
-Elfü elfi šalâtin ve elfü elfi selâmin ʿaleyke yâ emîne vaḥyillâh.
-Allahümme šalli ve sellim ve bârik ʿalâ seyyidinâ Muḥammedin ve ʿalâ âlihî ve ašḥâbihî bi-ʿadedi evraḳı’l-eşcâr ve emvâci’lbiḥâr ve ḳaṭarâti’l-emṭâr vağfir lenâ verḥamnâ velṭuf binâ ve bi-Üstâẕinâ Saʿîdi’n-Nursî (radiyallahu ʿanh) ve vâlideynâ ve bi-ṭalebeti Resâili’n-Nuri’š-šadıḳîne yâ ilâhenâ bi-külli šalâtin minhâ eşhedü en lâilâhe illâllah ve eşhedü enne Muḥammeden Resûlüllâhi Šallallâhü ʿAleyhi Ve sellem.”Aşağıdaki Duâ-i Tercümân-ı İsm-i A’zâm ile tes­bi­hata devam edilir:
-
-Sübḥâneke yâ Allah teʿâleyte yâ Raḥmân ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Raḥîm teʿâleyte yâ Kerîm ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Ḥamîd teʿâleyte yâ Ḥakîm ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Mecîd teʿâleyte yâ Melîk ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Ḳuddûs teʿâleyte yâ Selâm ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Mü’min teʿâleyte yâ Müheymin ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ ʿAzîz teʿâleyte yâ Cebbâr ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Mütekebbîr teʿâleyte yâ Ḫàlık ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Evvel teʿâleyte yâ Âḫir ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Ẓâhir teʿâleyte yâ Bâṭın ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Bâri’ teʿâleyte yâ Mušavvir ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Tevvâb teʿâleyte yâ Vehhâb ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Bâis teʿâleyte yâ Vâris ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Ḳadîm teʿâleyte yâ Muḳîm ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Ferd teʿâleyte yâ Vitr ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Nûr teʿâleyte yâ Settâr ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Celîl teʿâleyte yâ Cemîl ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Ḳàhir teʿâleyte yâ Ḳàdir ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Melîk teʿâleyte yâ Muḳtedir ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ ʿAlîm teʿâleyte yâ ʿAllâm ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ ʿAẓîm teʿâleyte yâ Ğafûr ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Ḥalîm teʿâleyte yâ Vedûd ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Şehîd teʿâleyte yâ Şâhid ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Kebîr teʿâleyte yâ Müteʿâl ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Nûr teʿâleyte yâ Lâṭîf ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Semiʿ teʿâleyte yâ Kefîl ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Ḳarîb teʿâleyte yâ Bašîr ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Ḥaḳ teʿâleyte yâ Mübîn ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Raûf teʿâleyte yâ Raḥîm ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Ṭâhir teʿâleyte yâ Muṭahhir ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Mücemmil teʿâleyte yâ Mufaḍ­ ḍıl ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Muẓhir teʿâleyte yâ Münʿim ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Deyyân teʿâleyte yâ Sulṭân ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Ḥannân teʿâleyte yâ Mennân ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Eḥad teʿâleyte yâ Šamed ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Ḥayy teʿâleyte yâ Ḳayyûm ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ ʿAdl teʿâleyte yâ Ḥakem ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Sübḥâneke yâ Ferd teʿâleyte yâ Ḳuddûs ecirnâ mine’n-nâr bi-ʿafvike yâ Raḥmân.
-Avuçlar yukarı gelecek şekilde eller kaldırılır: “Sübḥâneke âhiyyen şerâhiyyen teʿâleyte lâ ilâhe illâ ente ecirnâ ve ecir Üstâẕenâ Saʿîde’n-Nursî (raḍıyallâhu ʿanh) ve vâlideynâ ve iḫvânenâ ve eḫavâtinâ ve ṭalebete Resâili’n-Nûri ve rufeḳàenâ ve aḥbâbene’l-mü’minîne’lmuḫlišîne mine’n-nâr. (Avuç içleri yere bakacak şekilde çevrilir.) Ve min-külli nâr vaḥ­ feẓnâ min-şerri’n-nefsi ve’ş-şeyṭân ve minşerri’l-cinni ve’l-insân ve min-şerri’l-bidʿati ve’ḍ-ḍalâlâti ve’l-ilḥâdi ve’ṭ-ṭuğyân. (Avuç iç­leri tekrar yukarıya baka­cak şekle getirilir.) Bi-ʿafvike yâ Mücîr, bi-faḍlike yâ Ğaffâr biraḥmetike yâ Erḥame’r-râḥimîn. Allahümm’e-dḫılne’l-Cennete meʿâ’l-ebrâr, bi­-şefâʿati nebiyyike’l-muḫtâr. Âmin, ve’lḥamdü lillâhi Rabbi’l-Âlemîn.”
-
-Nebe’ (Amme) Sûresi okunur ve tesbihat sona erer.
-
-“Bismillâhirraḥmânirraḥîm ʿAmme yetesêelûn . ʿAni’n-nebei’l-ʿaẓîm . Elleẓî hüm fîhi muḫtelifûn . Kellâ seyʿalemûn . Sümme kellâ seyʿalemûn . Elem necʿali’l-arḍa mihâdâ . Ve’l-cibâle evtâdâ . Ve ḫalaḳnâküm ezvâcâ . Ve ceʿalnâ nevmeküm sübâtâ . Ve ceʿalne’l-leyle libâsâ . Ve ceʿalne’n-nehâra meʿâşâ . Ve beneynâ fevḳaküm sebʿan şidâdâ . Ve ceʿalnâ sirâcev-vehhâcâ . Ve enzelnâ mine’l-mu’širâti mâen seccâcâ . Linuḫrice bihî ḥabbev-venebâtâ . Ve cennâtin elfâfâ . İnne yevme’l-fašli kâne mîḳàtâ . Yevme yünfeḫu fiššûri fete’tûne efvâcâ . Ve fütiḥatissemâü fekânet ebvâbâ . Ve süyyirati’l-cibâlü fekânet serâbâ . İnne Cehenneme kânet miršâdâ . Li’ṭ-ṭâğîne meâbâ . Lâbisîne fîhâ eḥḳàbâ . Lâ yeẕûḳùne fîhâ berdev-velâ şarâbâ . İllâ ḥamîmev-veğassâḳâ .cezâev-vifâḳâ . İnnehüm kânû lâ yercûne ḥisâbâ . Ve keẕẕebû bi-âyâtinâ kiẕẕâbâ . Ve külle şey’in aḥšaynâhü kitâbâ . Feẕûḳû felen-nezîdeküm illâ ʿaẕâbâ . İnne li’l-mütte­ ḳîne mefâzâ . Ḥadâiḳa ve aʿnâbâ . Ve kevâibe etrâbâ . Ve ke’sen dihâḳâ . Lâ yesmeʿûne fîhâ lağvev-velâ-kiẕẕâbâ . Cezâem-mi’rRabbike ʿaṭâen ḥisâbâ . Rabbi’s-semâvâti ve’l-arḍi vemâ beynehüme’r-raḥmâni lâ yemlikûne minhü ḫiṭâbâ . Yevme yeḳûmü’r-rûḥu ve’l-melâiketü šaffâ . Lâ yetekellemûne illâ men eẕine lehü’r-raḥmânü ve ḳâle šavâbâ . Ẕâlike’l-yevmü’l-haḳḳu femenşâetteḫaẕe ilâ Rabbihî meâbâ . İnnâ enẕernâküm ʿaẕâben ḳarîbâ, yevme yenẓuru’l-mer’ü mâ ḳaddemet yedâhü ve yeḳùlü’l-kâfiru yâ leytenî küntü tü­ râbâ.</p>
-        </div>
-        <div class="icerik ic4" style="display: block">
-            <h2>Akşam Tesbihatı</h2>
-            <p>Akşam namazının farzı kılınıp selâm verildikten sonra, “Allâhümme ente’s-selâmü ve minke’s-selâm, tebârekte yâ ẕe’l-celâli ve’likrâm” denilir ve aşağıdaki Salât-ı Münciye Duası, (yani Salâte’n-Tüncînâ) oku­nur: “Allahümme šalli alâ seyyidinâ Muḥammedin ve ʿalâ âli seyyidinâ Muḥammed. Šalâten tüncînâ bihâ min-cemîʿı’l-ehvâli ve’lâfât. (“ve’l-âfât” derken avuç içleri yere bakacak şekilde çevrilir, bitince de eski haline getirilir.) Ve takḍîlenâ bi-hâ cemîʿa’l-ḥâcât. Ve tüṭahhirunâ bi-hâ min-cemîʿı’s-seyyiât. Ve terfeʿunâ bi-hâ ʿındeke aʿle’d-derecât. Ve tübelliğunâ bi-hâ aḳša’l-ğâyât. Min-cemîʿı’lḫayrâti fi’l-ḥayâti ve baʿde’l-memât. Âmin yâ Mucîbe’d-deʿavâti ve’l-ḥamdü lillâhi Rabbi’lʿâlemîn. Âmin” denilir ve eller yüze sürülüp indirilir.
-Akşam namazının son sünneti kılınır.Selam verdikten sonra,
-
-“Âmennâ bi-ennehü” (1 defa söylenir.) “Lâ ilâhe illâllahü, vaḥdehû, lâ şerîke leh, lehü’l-mülkü ve lehü’l-ḥamdü, yuḥyî ve yümît, bi-yedihi’l-ḫayr ve hüve ʿalâ külli şey’in ḳadîr.” (9 defa söy­lenir) dedikten sonra onuncuda “Lâ ilâhe illâllahü, vaḥdehû, lâ şerîke leh, lehü’l-mülkü ve lehü’l-ḥamdü, yuḥyî ve yümît ve hüve ḥayyün lâ yemût, bi-yedihi’l-ḫayr ve hüve ʿalâ külli şey’in ḳadîr ve ileyhi’l-mašîr.”İstiâze Duası’yla tesbihâta devam edilir (dua eder­ken eller kaldırılır ve avuç içleri yere bakacak şekilde tutulur):
-
- 
-
- 
-
-“Allahümme ecirnâ mine’n-nâr. (3, 5 veya 7 de­fa tekrar edilir.)
-Allahümme ecirnâ min-külli nâr.
-Allahümme ecirnâ min-fitneti’d-dîniyyeti ve’d-dünyeviyyeh.
-Allahümme ecirnâ min-fitneti âḫiri’z-zemân.
-Allahümme ecirnâ min-fitneti Mesîḥı’dDeccâli ve’s-Süfyân.
-Allahümme ecirnâ mine’ḍ-ḍalâlâti ve’l-bidʿıyyâti ve’l-beliyyât.
-Allahümme ecirnâ min-şerri’n-nefsi’lemmâreh.
-Allahümme ecirnâ min-şürûri’n-nüfûsi’lemmârâti’l-firʿavniyyeh.
-Allahümme ecirnâ min-şerri’n-nisâ.
-Allahümme ecirnâ min-belâi’n-nisâ.
-Allahümme ecirnâ min-fitneti’n-nisâ.
-Allahümme ecirnâ min-ʿaẕâbi’l-ḳabr.
-Allahümme ecirnâ min-ʿaẕâbi yevmi’lḳıyâmeh.
-Allahümme ecirnâ min-ʿaẕâbi Cehennem.
-Allahümme ecirnâ min-ʿaẕâbi ḳahrik.
-Allahümme ecirnâ min-ʿnâri ḳahrik.
-Allahümme ecirnâ min-ʿaẕâbi’l-ḳabri ve’nnîrân.
-Allahümme ecirnâ mine’r-riyâi ve’ssümʿati ve’l-ʿucubi ve’l-faḫr.
-Allahümme ecirnâmin-tecâvüzi’l-mülḥıdîn.
-Allahümme ecirnâ min-şerri’l-münâfiḳîn.
-Allahümme ecirnâ min-fitneti’l-fâsıḳîn.
-Allahümme ecirnâ ve ecir vâlideynâ ve ṭalebete Resâili’n-Nûri’š- šâdiḳîne fî-ḫıdmeti’l-Ḳur’âni ve’l-îmân. Ve aḥbâbene’l-mü’minîne’l-muḫlišîne ve aḳrabâenâ ve ecdâdenâ mine’n-nâr. (Bundan son­ra avuç içleri yukarı çevrilir.) Bi-ʿafvike yâ Mücîr, bi-faḍlike yâ Ğaffâr. Allâhümme’d-ḫılne’l-Cennete meʿâ’l-ebrâr. Allâhümme’d-ḫılne’l-Cennete meʿâ’l-ebrâr. Allâhümme’d-ḫılnâ ve edḫı’l-Üstâẕenâ Saʿîde’n-Nursî (radiyallâhu ʿanh) ve vâlideynâ ve ṭalebete Resâili’n-Nûri’š-šâdıḳîne ve iḫvânenâ ve eḫavâtinâ ve aḳrabâenâ ve ecdâdenâ ve aḥbâbene’l-mü’minîne’l-muḫlišîne fî-ḫıdmeti’l-îmâni ve’l-Ḳur’ân. El-Cennete meʿa’l-ebrâr bi-şefâati nebiyyike’l-muḫtar ve âlihi’l-eṭhâr ve ešḥâbihi’l-aḫyâr ve sellim mâ dâme’l-leylü ve’n-nehâr. Âmîn, ve’l-ḥamdü lillâhi Rabbi’lʿÂlemîn” denilir ve eller yüze sü­rülür.
-
-Sonra namaz tesbihatına şu dua ile devam edi­lir: “Sübḥânallahi ve’l-ḥamdü lillâhi ve lâ ilâhe illâllahü vallahü ekber ve lâ ḥavle ve lâ ḳuvvete illâ billâhi’l-ʿaliyyi’l-ʿaẓîm.”Ve Âyete’l-Kürsî okunur: “Bismillâhirraḥmânirraḥîm. Allahü lâ ilâhe illâ hüve’l-ḥayyü’l-ḳayyûm. Lâ te’ḫuẕühû sinetün ve lâ nevm. Lehû mâ fi’s-semâvâti vemâ fi’l-arḍı. Menẕelleẕî yeşfeʿu ʿındehû illâ bi-iẕnih. Yâʿlemü mâ beyne eydîhim ve mâ ḫalfehüm ve lâ yuḥîṭûne bi-şey’in min-ʿılmihî illâ bi-mâ şâe. Vesiʿa kürsiyyühü’s-semâvâti ve’l-arḍi. Velâ yeûdü­ hû ḥıfẓuhümâ ve hüve’l-ʿaliyyü’l-ʿaẓîm.”
-
-Şu tesbih sözleri tekrarlanır: “Ve hüve’l-‘aliyyü’l-‘azîmu zü’l-celâli sübḥâ­nellâh” (1 defa), “Sübḥânallâh” (33 defa) “Sübḥâne’l-bâḳî dâimeni’l-ḥamdülillâh” (1 defa), “Elḥamdülillâh” (33 defa) “Rabbi’l-‘âlemîne te‘âlâ şânühü Allâhü Ekber” (1 defa), “Allâhü Ekber” (33 defa) “Lâ ilâhe illallâhü, vaḥdehû, lâ şerîke leh, lehü’l-mülkü ve lehü’l-ḥamdü, yuḥyî ve yümît ve hüve ḥayyün lâyemût, bi-yedihi’l-ḫayru ve hüve ʿalâ külli şey’in ḳadîrun ve ileyhi’l-mašîr” denilir ve na­maz duası yapılır.
-
-Duâdan sonra tesbihata şöyle devam edilir: “Faʿlem ennehu” (1 defa) “Lâ ilâhe illâllah” (33 defa) denilir ve ardından; “Muḥammedü’r-resûlüllâhi šallâllahü teʿâlâ ʿaleyhi vesellem.” (1 defa)  “Bismillâhirraḥmânirraḥîm. İnnallâhe ve melâiketehû yüšallûne ʿale’nnebiy. Yâ eyyühelleẕîne âmenû šallû ʿaleyhi ve sellimû teslîmâ. Lebbeyk.
-
-Allahümme šalli ʿalâ seyyidinâ Muḥammedin ve ʿalâ âli seyyidinâ Muḥammed. Biʿadedi külli dâin ve devâin ve bârik ve sellim ʿaleyhi ve ʿaleyhim kesîrâ. Allahümme šalli ʿalâ seyyidinâ Muḥammedin ve ʿalâ âli seyyidinâ Muḥammed. Biʿadedi külli dâin ve devâin ve bârik ve sellim ʿaleyhi ve ʿaleyhim kesîrâ. Allahümme šalli ʿalâ seyyidinâ Muḥammedin ve ʿalâ âli seyyidinâ Muḥammed. Biʿadedi külli dâin ve devâin ve bârik ve sellim ʿaleyhi ve ʿaleyhim kesîran kesîrâ. Šalli ve sellim yâ Rabbi ʿalâ ḥabîbike Muḥammedin ve ʿalâ cemîʿı’l-enbiyâi ve’l-mürselîn ve ʿalâ âli küllin ve šahbi küllin ecmaʿîn. Âmin ve’l-ḥamdü lillâhi Rabbi’l-ʿâlemîn.
-
-Elfü elfi šalâtin ve elfü elfi selâmin ʿaleyke yâ Resûlallah.
-Elfü elfi šalâtin ve elfü elfi selâmin ʿaleyke yâ Ḥabîballah.
-Elfü elfi šalâtin ve elfü elfi selâmin ʿaleyke yâ emîne vaḥyillâh.
-Allahümme šalli ve sellim ve bârik ʿalâ seyyidinâ Muḥammedin ve ʿalâ âlihî ve ašḥâbihî bi-ʿadedi evraḳı’l-eşcâr ve emvâci’lbiḥâr ve ḳaṭarâti’l-emṭâr vağfir lenâ verḥamnâ velṭuf binâ ve bi-Üstâẕinâ Saʿîdi’n-Nursî (radiyallahu ʿanh) ve vâlideynâ ve bi-ṭalebeti Resâili’n-Nuri’š-šadıḳîne yâ ilâhenâ bi-külli šalâtin minhâ eşhedü en lâilâhe illâllah ve eşhedü enne Muḥammeden Resûlüllâhi Šallallâhü ʿAleyhi Ve sellem.”Aşağıdaki Duâ-i Tercümân-ı İsm-i A’zâm ile tes­bi­hata devam edilir:
-
-Yâ Cemîlu yâ Allah,
-Yâ Ḳarîbu yâ Allah
-Yâ Mucîbu yâ Allah,
-Yâ Ḥabîbu yâ Allah
-Yâ Raûfu yâ Allah,
-Yâ ʿAṭûfu yâ Allah
-Yâ Maʿrûfu yâ Allah,
-Yâ Lâṭîfu yâ Allah
-Yâ ʿAẓîmu yâ Allah,
-Yâ Ḥannânu yâ Allah
-Yâ Mennânu yâ Allah,
-Yâ Deyyânu yâ Allah
-Yâ Sübḥânu yâ Allah,
-Yâ Emânu yâ Allah
-Yâ Bürhânu yâ Allah,
-Yâ Sulṭânu yâ Allah
-Yâ Müsteʿânu yâ Allah,
-Yâ Muḥsinu yâ Allah
-Yâ Müteʿâlu yâ Allah,
-Yâ Raḥmânu yâ Allah
-Yâ Raḥîmu yâ Allah,
-Yâ Kerîmu yâ Allah
-Yâ Mecîdu yâ Allah,
-Yâ Ferdu yâ Allah
-Yâ Vitru yâ Allah,
-Yâ Eḥadu yâ Allah
-Yâ Šamedu yâ Allah,
-Yâ Maḥmûdu yâ Allah
-Yâ Šâdıḳa’l-Vaʿdi yâ Allah,
-Yâ ʿAliyyu yâ Allah
-Yâ Ğaniyyu yâ Allah,
-Yâ Şâfî yâ Allah
-Yâ Kâfî yâ Allah,
-Yâ Muʿâfî yâ Allah
-Yâ Bâḳî yâ Allah,
-Yâ Hâdî yâ Allah
-Yâ Ḳàdiru yâ Allah,
-Yâ Sâtiru yâ Allah
-Yâ Ḳahhâru yâ Allah,
-Yâ Cebbâru yâ Allah
-Yâ Ğaffâru yâ Allah,
-Yâ Fettâḥu yâ Allah
-Avuçlar yukarı gelecek şekilde eller açılır:”Yâ Rabbe’s-semâvâti ve’l-arḍı, yâ ẕe’l-celâli ve’l-ikrâm. Es’elüke bi-ḥaḳḳı hâẕihi’l-esmâi küllihâ entüšalliye ʿalâ seyyidinâ Muḥammedin ve ʿalâ âli Muḥammedin verḥam Muḥammeden kemâ šalleyte ve sellemte ve bârekte ve raḥimte ve teraḥḥamte ʿalâ İbrâhîme ve ʿalâ âli İbrâhîme fi’l-ʿâlemîn, Rabbenâ inneke ḥamîdü’m-mecîd, bi-raḥmetike yâ erḥamerrâḥimîn, ve’l-ḥamdülillâhi Rabbi’l-ʿâlemîn.
-Haşir Sûresi’nin 20-24. âyetleri (Lâyestevî) o­ku­na­rak tesbihat bitirilir.
-
-“Bismillâhirraḥmânirraḥîm Lâ yestevî ašḥâbü’n-nâri ve ašḥâbü’l-Cenneh. Ašḥâbü’l-Cenneti hümü’l-fâizûn. . Lev enzelnâ hâẕe’l-Ḳur’âne ʿalâ cebelin leraeytehû ḫâşiʿan mütešaddian min-ḫaşyetillâh. Ve tilke’l-emsâlü naḍribühâ linnâsi leʿallehüm yetefekkerûn. . Hüvallahü’l-leẕî lâ ilâhe illâ hû. ʿÂlimü’l-ğaybi ve’ş-şehâdeti. Hüve’rRaḥmânü’r-Raḥîm. . Hüvallâhü’l-leẕî lâ ilâhe illâ hû. El-Melikü’l-Ḳuddûsü’s-Selâmü’l-Mü’­ minü’l-Müheyminü’l-ʿAzîzü’l-Cebbârü’l-Mü­ tekebbir. Sübḥânellâhi ʿammâ yüşrikûn. . Hüvallâhü’l-Ḫàliḳu’l-Bâriü’l-Müšavviru lehü’lEsmâü’l-­Ḥüsnâ. Yüsebbiḥu lehû mâ fi’ssemâvâti ve’l-arḍi. Ve hüve’l-ʿAzîzü’l-Ḥakîm.”</p>
-        </div>
-        <div class="icerik ic5" style="display: block">
-            <h2>Yatsı Tesbihatı</h2>
-            <p>Yatsı namazının farzı kılınıp selâm verildikten sonra, “Allâhümme ente’s-selâmü ve minke’s-selâm, tebârekte yâ ẕe’l-celâli ve’likrâm” denir. Daha sonra, “Allahümme šalli alâ seyyidinâ Muḥammedin ve ʿalâ âli seyyidinâ Muḥammed. Šalâten tüncînâ bihâ min-cemîʿı’l-ehvâli ve’l-âfât. (“ve’l- âfât” derken avuç içleri yere bakacak şekilde çevrilir, bitince de eski haline getirilir.) Ve takḍîlenâ bi-hâ cemîʿa’l-ḥâcât. Ve tüṭahhirunâ bi-hâ min-cemîʿı’s-seyyiât. Ve terfeʿunâ bi-hâ ʿindeke aʿle’d-derecât. Ve tübelliğunâ bi-hâ aḳša’l-ğâyât. Min-cemîʿi’l-ḫayrâti fi’l-ḥayâti ve baʿde’l-memât. Âmin yâ Mucîbe’d-deʿavâti ve’l-ḥamdü lillâhi Rabbi’l-ʿâlemîn. Âmin” denilir ve eller yüze sürülüp indirilir.
-
-Yatsı namazının son sünneti ve Vitir namazı kılındıktan sonra tesbihata şu dua ile devam edilir: “Sübḥânallahi velḥamdü lillâhi ve lâilâhe illâllahü vallahü ekber ve lâ ḥavle ve lâ ḳuvvete illâ billâhi’l-ʿaliyyi’l-ʿaẓîm.” Ve Âyete’l-Kürsî okunur: “Bismillâhirraḥmânirraḥîm. Allahü lâ ilâhe illâ hüve’l-ḥayyü’l-ḳayyûm. Lâ te’ḫuẕühû sinetün ve lâ nevm. Lehû mâ fi’s-semâvâti ve mâ fi’l-arḍi. Menẕelleẕî yeşfeʿu ʿindehû illâ bi-iẕnih. Yâʿlemü mâ beyne eydîhim ve mâ ḫalfehüm ve lâ yuḥîṭûne bişey’in min-ʿilmihî illâ bimâ şâe. Vesiʿa kürsiyyühü’s-semâvâti ve’l-arḍi. Ve lâ yeûdühû ḥıfẓuhümâ ve hüve’l-ʿaliyyü’l-ʿaẓîm.
-
-Şu tesbih sözleri tekrarlanır: “Ve hüve’l-‘aliyyü’l-‘az. îmu zü’l-celâli sübḥâ­ nellâh” (1 defa), “Sübḥânallâh” (33 defa) “Sübḥâne’l-bâḳî dâimeni’l-ḥamdülillâh” (1 defa), “Elḥamdülillâh” (33 defa) “Rabbi’l-‘âlemîne te‘âlâ şânühü Allâhü Ekber” (1 defa), “Allâhü Ekber” (33 defa) “Lâ ilâhe illâllahü, vaḥdehû, lâ şerîke leh, lehü’l-mülkü ve lehü’l-ḥamdü, yuḥyî ve yümît ve hüve ḥayyün lâ yemût, bi-yedihi’l-ḫayru ve hüve ʿalâ külli şey’in ḳadîr ve ileyhi’l-mašîr” denilir ve namaz du­a­sı yapılır. Duâdan sonra tesbihata şöyle devam edilir: “Faʿlem ennehu” (1 defa) “Lâ ilâhe illâllah” (33 defa söylenir.) “Muḥammedü’r-resûlüllâhi šallâllahü teʿâlâ ʿaleyhi vesellem.” (1 defa) Tesbihâtın burasında Peygamberimize (a.s.m.) şöyle salât ve selâm edilir: “Bismillâhirraḥmânirraḥîm. İnnallâhe ve melâiketehû yüšallûne ʿale’nnebiy. Yâ eyyühelleẕîne âmenû šallû ʿaleyhi ve sellimû teslîmâ. Lebbeyk.
-
- 
-
-Allahümme šalli ʿalâ seyyidinâ Muḥammedin ve ʿalâ âli seyyidinâ Muḥammed. Biʿadedi külli dâin ve devâin ve bârik ve sellim ʿaleyhi ve ʿaleyhim kesîrâ.
-Allahümme šalli ʿalâ seyyidinâ Muḥammedin ve ʿalâ âli seyyidinâ Muḥammed. Biʿadedi külli dâin ve devâin ve bârik ve sellim ʿaleyhi ve ʿaleyhim kesîrâ.
-Allahümme šalli ʿalâ seyyidinâ Muḥammedin ve ʿalâ âli seyyidinâ Muḥammed. Biʿadedi külli dâin ve devâin ve bârik ve sellim ʿaleyhi ve ʿaleyhim kesîran kesîrâ.
-Šalli ve sellim yâ Rabbi ‘alâ ḥabîbike Muḥammedin ve ʿalâ cemîʿı’l-enbiyâi ve’l-mürselîn ve ʿalâ âli küllin ve šahbi küllin ecmaʿîn. Âmin ve’l-ḥamdü lillâhi Rabbi’l-âlemîn.
-
-Elfü elfi šalâtin ve elfü elfi selâmin ʿaleyke yâ Resûlallah.
-Elfü elfi šalâtin ve elfü elfi selâmin ʿaleyke yâ Ḥabîballah.
-Elfü elfi šalâtin ve elfü elfi selâmin ʿaleyke yâ emîne vaḥyillâh.
-Allahümme šalli ve sellim ve bârik ʿalâ seyyidinâ Muḥammedin ve ʿalâ âlihî ve ašḥâbihî bi-ʿadedi evraḳı’l-eşcâr ve emvâci’lbiḥâr ve ḳaṭarâti’l-emṭâr vağfir lenâ verḥamnâ velṭuf binâ ve bi-Üstâẕinâ Saʿîdi’n-Nursî (raḍiyallahu ʿanh) ve vâlideynâ ve bi-ṭalebeti Resâili’n-Nuri’š-šadıḳîne yâ ilâhenâ bi-külli šalâtin minhâ eşhedü en-lâilâhe illâllah ve eşhedü enne Muḥammeden Resûlüllâhi Šallallâhü ʿAleyhi Vesellem.”
-
-İsm-i A’zâm duası okunur:
-
-“Bismillâhirraḥmânirraḥîm.
-
-Yâ Cemîlu yâ Allah,
-Yâ Ḳarîbu yâ Allah
-Yâ Mucîbu yâ Allah,
-Yâ Ḥabîbu yâ Allah
-Yâ Raûfu yâ Allah,
-Yâ ʿAṭûfu yâ Allah
-Yâ Maʿrûfu yâ Allah,
-Yâ Lâṭîfu yâ Allah
-Yâ ʿAẓîmu yâ Allah,
-Yâ Ḥannânu yâ Allah
-Yâ Mennânu yâ Allah,
-Yâ Deyyânu yâ Allah
-Yâ Sübḥânu yâ Allah,
-Yâ Emânu yâ Allah
-Yâ Bürhânu yâ Allah,
-Yâ Sulṭânu yâ Allah
-Yâ Müsteʿânu yâ Allah,
-Yâ Muḥsinu yâ Allah
-Yâ Müteʿâlu yâ Allah,
-Yâ Raḥmânu yâ Allah
-Yâ Raḥîmu yâ Allah,
-Yâ Kerîmu yâ Allah
-Yâ Mecîdu yâ Allah,
-Yâ Ferdu yâ Allah
-Yâ Vitru yâ Allah,
-Yâ Eḥadu yâ Allah
-Yâ Šamedu yâ Allah,
-Yâ Maḥmûdu yâ Allah
-Yâ Šâdıḳa’l-Vaʿdi yâ Allah,
-Yâ ʿAliyyu yâ Allah
-Yâ Ğaniyyu yâ Allah,
-Yâ Şâfî yâ Allah
-Yâ Kâfî yâ Allah,
-Yâ Muʿâfî yâ Allah
-Yâ Bâḳî yâ Allah,
-Yâ Hâdî yâ Allah
-Yâ Ḳàdiru yâ Allah,
-Yâ Sâtiru yâ Allah
-Yâ Ḳahhâru yâ Allah,
-Yâ Cebbâru yâ Allah
-Yâ Ğaffâru yâ Allah,
-Yâ Fettâḥu yâ Allah”
-Avuçlar yukarı gelecek şekilde eller açılır:
-
-Yâ Rabbe’s-semâvâti ve’l-arḍı, yâ ẕe’l-celâli ve’l-ikrâm. Es’elüke bi-ḥaḳḳı hâẕihi’l-esmâi küllihâ entüšalliye ʿalâ seyyidinâ Muḥammedin ve ʿalâ âli Muḥammedin verḥam Muḥammeden kemâ šalleyte ve sellemte ve bârekte ve raḥimte ve teraḥḥamte ʿalâ İbrâhîme ve ʿalâ âli İbrâhîme fi’l-ʿâlemîn, Rabbenâ inneke ḥamîdü’m-mecîd, bi-raḥmetike yâ erḥamerrâḥimîn, ve’l-ḥamdülillâhi Rabbi’l-ʿâlemîn.”
-
-Bakara Sûresi’nin285-286.âyetleri(Âmene’r-re­sûlü) okunur ve tesbihat sona erer.
-
-“Bismillâhirraḥmânirraḥîm Âmene’r-resûlü bimâ ünzile ileyhi mir’rabbihî ve’l-mü’minûn. Küllün âmene billâhi ve melâiketihî ve kütübihî ve rusulih. Lâ nûferriḳu beyne ehadim‑mirrusulih. Ve ḳàlû semiʿnâ ve aṭaʿnâ ğufrâneke rabbenâ ve ileyke’l-mašîr . Lâ yükellifullâhü nefsen illâ vüsʿahâ. Lehâ mâ kesebet ve ʿaleyhâ mektesebet. Rabbenâ lâ tüâḫiẕnâ in-nesînâ ev aḫṭaʿnâ. Rabbenâ velâ taḥmil ʿaleynâ išran kemâ ḥameltehû ʿalelleẕîne min-ḳablinâ. Rabbenâ velâ tüḥammilnâ mâ lâ ṭâḳate lenâ bih. Vaʿfü ʿannâ, vağfir le-nâ, verḥamnâ, ente mevlânâ fenšurnâ ʿale’l-ḳavmil kâfirîn.</p>
-        </div>
-        </div>
-      </div>
-    </div>
-  </body>
-</html>
+    .anabar a{
+        margin: 2vw 6vw;
+    }
+}
