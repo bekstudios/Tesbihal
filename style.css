@@ -800,8 +800,11 @@ label[for=tab5]::after{
         justify-content: space-around;
         align-items: center;
         
-        
+       
     }
 
 
+    .anabar a{
+        margin: 2vw 6vw;
+    }
 }
