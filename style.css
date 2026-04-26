@@ -141,7 +141,7 @@ input[type="radio"] {
     z-index: -1;
     
     /* Tüm renkleri buraya tek seferde yazıyoruz */
-    background: linear-gradient(to right, #ffaae6, #ffe695, #2192dd, #720039, black);
+    background: linear-gradient(to right, #ffaae6, #ffe695, #4795c9, #cc297a, black);
     background-size: 400% 100%; /* Arka planı 4 kat genişletiyoruz */
     
     transition: background-position 1.2s ease-in-out; /* Kayma hızı */
