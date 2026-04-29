@@ -663,9 +663,8 @@ label[for=tab5]::after{
     }
 
     .anadiv:hover {
-    animation-play-state: paused;
     
-    height: 700px;
+    height: 90vh;
     
     }
 
