@@ -156,6 +156,14 @@ input[type="radio"] {
 #tab5:checked ~ .animasyonlu-bg { background-position: 100% 0%; }
 
 /* Doğru Seçici: Önce input, sonra aşağısındaki anadiv, sonra onun içindeki label */
+#tab3:checked ~ .anadiv .solpanel label[for="tab1"],
+#tab3:checked ~ .anadiv .solpanel label[for="tab2"],
+#tab3:checked ~ .anadiv .solpanel label[for="tab4"],
+#tab3:checked ~ .anadiv .solpanel label[for="tab5"]
+ {
+    color: white;
+}
+
 #tab4:checked ~ .anadiv .solpanel label[for="tab1"],
 #tab4:checked ~ .anadiv .solpanel label[for="tab2"],
 #tab4:checked ~ .anadiv .solpanel label[for="tab3"],
@@ -360,6 +368,7 @@ label[for=tab5]::after{
 }
 
 
+#tab3:checked ~ .anadiv .solpanel label::after,
 #tab4:checked ~ .anadiv .solpanel label::after,
 #tab5:checked ~ .anadiv .solpanel label::after {
     color: white;
@@ -508,7 +517,7 @@ label[for=tab5]::after{
 /* Sağ panelin içinde herhangi bir yerde #toppadding'e hover yapılırsa panel esnesin */
 .sagpanel .icerik:has(#toppadding:hover) {
     
-    padding-top: 30px;
+    padding-top: 70px;
     transition: all 0.3s ease; /* Yumuşak geçiş için */
 }
 
@@ -604,6 +613,7 @@ label[for=tab5]::after{
     
 }
 
+#tab3:checked ~ .top-bar .anabar .orta a,
 #tab4:checked ~ .top-bar .anabar .orta a,
 #tab5:checked ~ .top-bar .anabar .orta a {
     color: white;
@@ -661,15 +671,20 @@ label[for=tab5]::after{
 
     .anadiv {
     display: flex;
-    height: 700px; /* Sabit bir yükseklik verdik ki sağ taraf kayabilsin */
+    flex-direction: column;
+    height: 90vh; /* Sabit bir yükseklik verdik ki sağ taraf kayabilsin */
     border: 3px var(--acik-mavi);
-    border-radius: 20px;
+    border-radius: 20px 20px 0 0;
     overflow: hidden;
     box-sizing: border-box;
-    width: 75vh;
+    width: 100vw;
     box-shadow: 0 20px 40px rgba(0,0,0,0.4);
     transition: 0.3s;
-    margin-top: 40px;
+    
+    margin-top: auto;
+    bottom: 0;
+    left: 0;
+    
 
     animation: none;
     
@@ -690,7 +705,7 @@ label[for=tab5]::after{
     }
 
     .solpanel:hover {
-        height: 70px;
+        height: 50px;
         width: 100%;
     }
 
@@ -766,6 +781,7 @@ label[for=tab5]::after{
 }
 
 
+#tab3:checked ~ .anadiv .solpanel label::after,
 #tab4:checked ~ .anadiv .solpanel label::after,
 #tab5:checked ~ .anadiv .solpanel label::after {
     color: white;
