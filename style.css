@@ -280,6 +280,7 @@ h2 {
     transition: 0.3s;
     margin-top: 40px;
     
+    z-index: 100;
 }
 
 .solpanel {
@@ -294,7 +295,7 @@ box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3)
     
     transition: 0.5s; /* soldan saga butonlar kayıyor */
     
-    
+    z-index: -10;
 }
 
 .solpanel:hover {
@@ -473,8 +474,7 @@ label[for=tab5]::after{
     position: relative;
 
     display: inline-block; /* BU ÇOK ÖNEMLİ: Kutu gibi davranmasını sağlar */
-    vertical-align: top; /* Üst satıra kaymayı engellemek için metin hizasına sabitle */
-    line-height: normal;
+    
 
     z-index: 10;
     
@@ -490,7 +490,7 @@ label[for=tab5]::after{
     background-color: #333333ea;
     color: #fff;
 
-    margin-left: -20px;    
+    align-self: center;    
     padding: 8px 12px;   
     
     border-radius: 6px;
